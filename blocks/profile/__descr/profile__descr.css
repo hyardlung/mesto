@@ -1,0 +1,6 @@
+.profile__descr {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.22;
+  grid-column: 1 / 2;
+}

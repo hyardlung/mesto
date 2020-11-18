@@ -1,0 +1,7 @@
+.profile {
+  display: grid;
+  grid-template-columns: 120px auto fit-content(150px);
+  align-items: center;
+  gap: 30px;
+  color: #fff;
+}

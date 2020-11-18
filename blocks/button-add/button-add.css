@@ -1,0 +1,8 @@
+.button-add {
+  width: 150px;
+  height: 50px;
+  padding: 0;
+  background-color: transparent;
+  border: 2px solid #fff;
+  cursor: pointer;
+}

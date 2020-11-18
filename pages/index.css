@@ -10,3 +10,18 @@
 @import url('../blocks/page/__header/page__header.css');
 @import url('../blocks/logo/logo.css');
 @import url('../blocks/logo/__image/logo__image.css');
+
+/* profile */
+@import url('../blocks/profile/profile.css');
+@import url('../blocks/page/__profile/page__profile.css');
+@import url('../blocks/avatar/avatar.css');
+@import url('../blocks/profile/__avatar/profile__avatar.css');
+@import url('../blocks/avatar/__image/avatar__image.css');
+@import url('../blocks/profile/__info/profile__info.css');
+@import url('../blocks/profile/__name/profile__name.css');
+@import url('../blocks/profile/__descr/profile__descr.css');
+@import url('../blocks/button-edit/button-edit.css');
+@import url('../blocks/button-edit/__icon/button-edit__icon.css');
+@import url('../blocks/profile/__button-edit/profile__button-edit.css');
+@import url('../blocks/button-add/button-add.css');
+@import url('../blocks/button-add/__icon/button-add__icon.css');
