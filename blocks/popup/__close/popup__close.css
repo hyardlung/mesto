@@ -1,0 +1,17 @@
+.popup__close {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  transform: rotate(45deg);
+  transition: all .3s;
+  cursor: pointer;
+}
+
+.popup__close:hover {
+  opacity: .6;
+}
