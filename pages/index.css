@@ -19,12 +19,11 @@
 @import url('../blocks/avatar/__image/avatar__image.css');
 @import url('../blocks/profile/__info/profile__info.css');
 @import url('../blocks/profile/__name/profile__name.css');
-@import url('../blocks/profile/__descr/profile__descr.css');
-@import url('../blocks/button-edit/button-edit.css');
-@import url('../blocks/button-edit/__icon/button-edit__icon.css');
-@import url('../blocks/profile/__button-edit/profile__button-edit.css');
-@import url('../blocks/button-add/button-add.css');
-@import url('../blocks/button-add/__icon/button-add__icon.css');
+@import url('../blocks/profile/__about/profile__about.css');
+@import url('../blocks/profile/__edit-button/profile__edit-button.css');
+@import url('../blocks/profile/__edit-icon/profile__edit-icon.css');
+@import url('../blocks/profile/__add-button/profile__add-button.css');
+@import url('../blocks/profile/__add-icon/profile__add-icon.css');
 
 /* elements */
 @import url('../blocks/elements/elements.css');
