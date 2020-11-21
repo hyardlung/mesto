@@ -5,3 +5,9 @@
   font-weight: 400;
   color: #545454;
 }
+
+@media screen and (max-width: 930px) {
+  .footer__copyright {
+    font-size: clamp(14px, 1.9vw, 18px);
+  }
+}

@@ -4,3 +4,9 @@
   line-height: 1.14;
   font-weight: 500;
 }
+
+@media screen and (max-width: 930px) {
+  .profile__name {
+    font-size: clamp(27px, 4.6vw, 42px);
+  }
+}

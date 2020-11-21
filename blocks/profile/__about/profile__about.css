@@ -4,3 +4,10 @@
   line-height: 1.22;
   grid-column: 1 / 2;
 }
+
+@media screen and (max-width: 930px) {
+  .profile__about {
+    justify-self: center;
+    font-size: clamp(14px, 1.9vw, 18px);
+  }
+}

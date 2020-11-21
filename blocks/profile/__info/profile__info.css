@@ -1,6 +1,12 @@
 .profile__info {
   display: grid;
-  grid-template-rows: repeat(2, fit-content(40px));
-  grid-template-columns: repeat(2, fit-content(294px));
+  grid-template: repeat(2, fit-content(40px)) / repeat(2, fit-content(294px));
   gap: 16px 18px;
+}
+
+@media screen and (max-width: 930px) {
+  .profile__info {
+    justify-content: center;
+    gap: 9px 10px;
+  }
 }

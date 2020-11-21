@@ -5,8 +5,14 @@
   padding: 0;
   grid-column: 2 / 3;
   grid-row: 1 / 2;
-  align-self: center;
   background-color: transparent;
   border: 1px solid #fff;
   cursor: pointer;
+}
+
+@media screen and (max-width: 320px) {
+  .profile__edit-button {
+    width: 18px;
+    height: 18px;
+  }
 }

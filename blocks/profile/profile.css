@@ -1,7 +1,15 @@
 .profile {
   display: grid;
-  grid-template-columns: 120px auto fit-content(150px);
+  grid-template-columns: 120px auto 150px;
   align-items: center;
   gap: 30px;
+  padding: 0 19px;
   color: #fff;
+}
+
+@media screen and (max-width: 930px) {
+  .profile {
+    grid-template: repeat(3, auto) / 1fr;
+    justify-items: center;
+  }
 }

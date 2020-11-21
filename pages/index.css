@@ -9,6 +9,7 @@
 @import url('../blocks/header/header.css');
 @import url('../blocks/page/__header/page__header.css');
 @import url('../blocks/logo/logo.css');
+@import url('../blocks/header/__logo/header__logo.css');
 @import url('../blocks/logo/__image/logo__image.css');
 
 /* profile */
@@ -39,6 +40,7 @@
 @import url('../blocks/card/__like-icon/card__like-icon.css');
 
 /* footer */
+@import url('../blocks/footer/footer.css');
 @import url('../blocks/page/__footer/page__footer.css');
 @import url('../blocks/footer/__copyright/footer__copyright.css');
 
