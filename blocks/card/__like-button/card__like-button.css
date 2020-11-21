@@ -2,5 +2,10 @@
   padding: 0;
   background-color: transparent;
   border: none;
+  transition: all .3s;
   cursor: pointer;
+}
+
+.card__like-button:hover {
+  opacity: .6;
 }

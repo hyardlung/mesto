@@ -1,6 +1,11 @@
 .logo {
   display: block;
   max-width: 142px;
+  transition: all .3s;
+}
+
+.logo:hover {
+  opacity: .6;
 }
 
 @media screen and (max-width: 930px) {
