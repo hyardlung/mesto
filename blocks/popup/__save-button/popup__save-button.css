@@ -12,7 +12,7 @@
   cursor: pointer;
 }
 
-.popup__save:hover {
+.popup__save-button:hover {
   /*background-color: rgba(0, 0, 0, .8);*/
   opacity: .8;
 }
