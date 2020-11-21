@@ -13,6 +13,12 @@
 }
 
 .popup__save-button:hover {
-  /*background-color: rgba(0, 0, 0, .8);*/
   opacity: .8;
+}
+
+@media screen and (max-width: 550px) {
+  .popup__save-button {
+    margin-top: 46px;
+    font-size: 14px;
+  }
 }

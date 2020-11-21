@@ -2,3 +2,9 @@
   display: block;
   margin: auto;
 }
+
+@media screen and (max-width: 320px) {
+  .profile__add-icon {
+    width: 16px;
+  }
+}
