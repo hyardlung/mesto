@@ -3,27 +3,33 @@ let profileEditButton = document.querySelector('.profile__edit-button');
 let popup = document.querySelector('.popup');
 let popupCloseButton = document.querySelector('.popup__close-button');
 
-profileEditButton.addEventListener('click', togglePopupVisibility);
-popupCloseButton.addEventListener('click', togglePopupVisibility);
+let nameInput = document.querySelector('#name');
+let aboutInput = document.querySelector('#description');
+let profileName = document.querySelector('.profile__name');
+let profileAbout = document.querySelector('.profile__about');
 
-function togglePopupVisibility() {
-  popup.classList.toggle('popup_opened');
+profileEditButton.addEventListener('click', openPopup);
+popupCloseButton.addEventListener('click', closePopup);
+
+function openPopup() {
+  popup.classList.add('popup_opened');
+  // Сохранение значений profileName и profileAbout в инпуты
+  nameInput.value = profileName.textContent;
+  aboutInput.value = profileAbout.textContent;
+}
+
+function closePopup() {
+  popup.classList.remove('popup_opened');
 }
 
 
 // Редактирование имени и описания в профиле
 let popupForm = document.querySelector('.popup__form');
 
+popupForm.addEventListener('submit', formSubmitHandler);
+
 function formSubmitHandler (evt) {
   evt.preventDefault();
-
-  let nameInput = document.querySelector('#name');
-  let aboutInput = document.querySelector('#description');
-  let profileName = document.querySelector('.profile__name');
-  let profileAbout = document.querySelector('.profile__about');
-
   profileName.textContent = nameInput.value;
   profileAbout.textContent = aboutInput.value;
 }
-
-popupForm.addEventListener('submit', formSubmitHandler);
