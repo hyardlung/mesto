@@ -1,4 +1,5 @@
 .profile__edit-button {
+  box-sizing: border-box;
   width: 24px;
   height: 24px;
   margin-top: 10px;
@@ -15,9 +16,15 @@
   opacity: .6;
 }
 
+@media screen and (max-width: 930px) {
+  .profile__edit-button {
+    width: clamp(18px, 3.3vw, 24px);
+    height: clamp(18px, 3.3vw, 24px);
+  }
+}
+
 @media screen and (max-width: 320px) {
   .profile__edit-button {
-    width: 18px;
-    height: 18px;
+    margin-top: 5px;
   }
 }

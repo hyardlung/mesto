@@ -1,12 +1,18 @@
 .profile__info {
   display: grid;
-  grid-template: repeat(2, fit-content(40px)) / repeat(2, fit-content(294px));
+  grid-template: repeat(2, fit-content(100px)) / repeat(2, fit-content(60vw));
   gap: 16px 18px;
 }
 
 @media screen and (max-width: 930px) {
   .profile__info {
     justify-content: center;
-    gap: 9px 10px;
+    gap: 8px 10px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .profile__info {
+    margin-left: 30px;
   }
 }
