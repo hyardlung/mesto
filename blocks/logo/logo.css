@@ -1,7 +1,9 @@
 .logo {
   display: block;
   max-width: 142px;
+  height: 33px;
   transition: all .3s;
+  background: transparent url('../../images/logo.svg') center center/contain no-repeat;
 }
 
 .logo:hover {
@@ -11,5 +13,6 @@
 @media screen and (max-width: 930px) {
   .logo {
     max-width: clamp(103px, 25vw, 142px);
+    max-height: clamp(24px, 3.6vw, 33px);
   }
 }
