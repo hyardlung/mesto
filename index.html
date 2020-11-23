@@ -116,9 +116,9 @@
         <img src="images/cross.svg" alt="Векторный крестик, кнопка Закрыть" class="popup__close-icon">
       </button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form action="submit" class="popup__form">
-        <input type="text" placeholder="Ваше имя" class="popup__input" id="name">
-        <input type="text" placeholder="О себе" class="popup__input" id="description">
+      <form action="submit" name="profileForm" class="popup__form">
+        <input type="text" name="profileName" placeholder="Ваше имя" class="popup__input">
+        <input type="text" name="profileAbout" placeholder="О себе" class="popup__input">
         <button type="submit" class="popup__save-button">Сохранить</button>
       </form>
     </div>
