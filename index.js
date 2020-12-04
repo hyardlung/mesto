@@ -4,7 +4,6 @@ let popup = document.querySelector('.popup');
 let popupCloseButton = document.querySelector('.popup__close-button');
 
 const popupAddCard = document.querySelector('.popup_add-card');
-const addCardButton = document.querySelector('.profile__add-button');
 const popupAddCardCloseButton = document.querySelector('.popup__close-button_add-card');
 
 
@@ -13,10 +12,13 @@ let aboutInput = document.querySelector('.popup__input[name="profileAbout"]');
 let profileName = document.querySelector('.profile__name');
 let profileAbout = document.querySelector('.profile__about');
 
+
+const addCardButton = document.querySelector('.profile__add-button');
 const cardNameInput = document.querySelector('.popup__input[name="cardName"]');
 const cardLinkInput = document.querySelector('.popup__input[name="cardLink"]');
 
 let popupForm = document.querySelector('.popup__form');
+const popupFormAddCard = document.querySelector('.popup__form_add-card');
 
 const cardsContainerElement = document.querySelector('.elements__list');
 const templateCard = document.querySelector('.elements__template');
@@ -63,6 +65,16 @@ function composeCard(item) {
   return newCard;
 }
 
+// добавление новых карточек
+function addNewCard () {
+  const cardName = cardNameInput.value;
+  const cardLink = cardLinkInput.value;
+  const addNewCard = composeCard({name: cardName, link: cardLink});
+  cardsContainerElement.prepend(addNewCard);
+  cardNameInput.value = '';
+  cardLinkInput.value = '';
+}
+
 function openEditProfilePopup() {
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
@@ -75,6 +87,8 @@ function closeEditProfilePopup() {
 
 function openAddNewCardPopup() {
   popupAddCard.classList.add('popup_opened');
+  cardNameInput.value = '';
+  cardLinkInput.value = '';
 }
 
 function closeAddNewCardPopup() {
@@ -88,11 +102,18 @@ function formSubmitHandler (evt) {
   closeEditProfilePopup()
 }
 
+function formSubmitHandlerAddCard(evt) {
+  evt.preventDefault();
+  addNewCard();
+  closeAddNewCardPopup();
+}
+
 profileEditButton.addEventListener('click', openEditProfilePopup);
 popupCloseButton.addEventListener('click', closeEditProfilePopup);
 popupForm.addEventListener('submit', formSubmitHandler);
 
 addCardButton.addEventListener('click', openAddNewCardPopup);
-popupAddCardCloseButton.addEventListener('click', closeAddNewCardPopup)
+popupAddCardCloseButton.addEventListener('click', closeAddNewCardPopup);
+popupFormAddCard.addEventListener('submit', formSubmitHandlerAddCard)
 
 renderList();
