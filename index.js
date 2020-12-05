@@ -63,11 +63,13 @@ function composeCard(item) {
   cardHeading.textContent = item.name;
   cardImage.src = item.link;
 
+  // лайк карточки
   const cardLikeButton = newCard.querySelector('.card__like-button');
   cardLikeButton.addEventListener('click', function (evt) {
     const cardLikeToggle = evt.target;
     cardLikeToggle.classList.toggle('card__like-button_active');
   });
+  addRemoveListenerToCard(newCard);
 
   return newCard;
 }
@@ -89,7 +91,7 @@ function openEditProfilePopup() {
   popup.classList.add('popup_opened');
 }
 
-// открытие попапа редактирования профиля
+// закрытие попапа редактирования профиля
 function closeEditProfilePopup() {
   popup.classList.remove('popup_opened');
 }
@@ -119,6 +121,18 @@ function formSubmitHandlerAddCard(evt) {
   evt.preventDefault();
   addNewCard();
   closeAddNewCardPopup();
+}
+
+// удаление карточки
+function removeCard(evt) {
+  const targetCard = evt.target.closest('.card');
+  targetCard.remove();
+}
+
+// обработчик события удаления карточки
+function addRemoveListenerToCard(item){
+  const removeButton = item.querySelector('.card__remove-button');
+  removeButton.addEventListener('click', removeCard);
 }
 
 profileEditButton.addEventListener('click', openEditProfilePopup);

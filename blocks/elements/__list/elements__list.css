@@ -12,7 +12,7 @@
 
 @media screen and (max-width: 930px) {
   .elements__list {
-    grid-template-columns: repeat(2, minmax(282px, auto));
+    grid-template-columns: repeat(2, minmax(282px, 430px));
   }
 }
 @media screen and (max-width: 630px) {
