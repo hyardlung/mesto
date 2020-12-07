@@ -1,8 +1,7 @@
 const popup = document.querySelector('.popup');
-const popupCloseButton = document.querySelector('.popup__close-button');
-
 const popupAddCard = document.querySelector('.popup_add-card');
-// const popupAddCardCloseButton = document.querySelector('.popup__close-button_add-card');
+const popupPreview = document.querySelector('.popup_preview');
+const popupCloseButtons = document.querySelectorAll('.popup__close-button');
 
 const nameInput = document.querySelector('.popup__input[name="profileName"]');
 const aboutInput = document.querySelector('.popup__input[name="profileAbout"]');
@@ -13,12 +12,11 @@ const addCardButton = document.querySelector('.profile__add-button');
 const cardNameInput = document.querySelector('.popup__input[name="cardName"]');
 const cardLinkInput = document.querySelector('.popup__input[name="cardLink"]');
 
-const popupForm = document.querySelector('.popup__form');
-const popupFormAddCard = document.querySelector('.popup__form_add-card');
-
-const popupPreview = document.querySelector('.popup_preview');
 const previewImage = popupPreview.querySelector('.preview__image');
 const previewCaption = popupPreview.querySelector('.preview__caption');
+
+const popupForm = document.querySelector('.popup__form');
+const popupFormAddCard = document.querySelector('.popup__form_add-card');
 
 const cardsContainerElement = document.querySelector('.elements__list');
 const templateCard = document.querySelector('.elements__template');
@@ -56,6 +54,7 @@ function renderList() {
   cardsContainerElement.append(...cardsList);
 }
 
+// генерация карточки из шаблона
 function composeCard(item) {
   const newCard = templateCard.content.cloneNode(true);
   const cardHeading = newCard.querySelector('.card__heading');
@@ -90,21 +89,6 @@ function addNewCard () {
   cardLinkInput.value = '';
 }
 
-// открытие попапа редактирования профиля
-function openEditProfilePopup() {
-  const profileEditButton = document.querySelector('.profile__edit-button');
-  profileEditButton.addEventListener('click', function () {
-  nameInput.value = profileName.textContent;
-  aboutInput.value = profileAbout.textContent;
-  popup.classList.add('popup_opened');
-  });
-}
-
-// // закрытие попапа редактирования профиля
-// function closeEditProfilePopup() {
-//   popup.classList.remove('popup_opened');
-// }
-
 // открытие попапа добавления карточки
 function openAddNewCardPopup() {
   addCardButton.addEventListener('click', function () {
@@ -112,19 +96,6 @@ function openAddNewCardPopup() {
     cardLinkInput.value = '';
     popupAddCard.classList.add('popup_opened');
   });
-}
-
-// // закрытие попапа добавления карточки
-// function closeAddNewCardPopup() {
-//   popupAddCard.classList.remove('popup_opened');
-// }
-
-// сохранение данных в профиле
-function formSubmitHandler(evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileAbout.textContent = aboutInput.value;
-  popup.classList.remove('popup_opened');
 }
 
 // подтверждение создания карточки
@@ -146,11 +117,35 @@ function addRemoveListenerToCard(item) {
   removeButton.addEventListener('click', removeCard);
 }
 
-// обработчик клика на крестик (который почему-то работает только для окна редактирования профиля)
-popupCloseButton.addEventListener('click', function(evt) {
-  const targetPopup = evt.target.closest('.popup');
-  targetPopup.classList.remove('popup_opened');
-});
+// открытие попапа редактирования профиля
+function openEditProfilePopup() {
+  const profileEditButton = document.querySelector('.profile__edit-button');
+  profileEditButton.addEventListener('click', function () {
+  nameInput.value = profileName.textContent;
+  aboutInput.value = profileAbout.textContent;
+  popup.classList.add('popup_opened');
+  });
+}
+
+// сохранение данных в профиле
+function formSubmitHandler(evt) {
+  evt.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileAbout.textContent = aboutInput.value;
+  popup.classList.remove('popup_opened');
+}
+
+// закрытие попапа
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+}
+
+// обработчик клика по крестику
+[...popupCloseButtons].forEach(function (closeButton) {
+  closeButton.addEventListener('click', function (evt) {
+    closePopup(evt.target.closest('.popup'));
+  });
+})
 
 popupForm.addEventListener('submit', formSubmitHandler);
 popupFormAddCard.addEventListener('submit', formSubmitHandlerAddCard);
