@@ -1,7 +1,7 @@
 const popup = document.querySelector('.popup');
 const popupAddCard = document.querySelector('.popup_add-card');
 const popupPreview = document.querySelector('.popup_preview');
-const popupCloseButtons = document.querySelectorAll('.popup__close-button');
+const popupCloseButtons = [...document.querySelectorAll('.popup__close-button')];
 
 const nameInput = document.querySelector('.popup__input[name="profileName"]');
 const aboutInput = document.querySelector('.popup__input[name="profileAbout"]');
@@ -141,7 +141,7 @@ function closePopup(popup) {
 }
 
 // обработчик клика по крестику
-[...popupCloseButtons].forEach(function (closeButton) {
+popupCloseButtons.forEach((closeButton) => {
   closeButton.addEventListener('click', function (evt) {
     closePopup(evt.target.closest('.popup'));
   });
