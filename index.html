@@ -29,65 +29,19 @@
 
       <section class="elements">
         <ul class="elements__list">
-          <li class="card">
-           <div class="card__image-wrapper">
-             <img src="./images/sundki.jpeg" alt="Горная гряда под ночным небом" class="card__image">
-           </div>
-            <div class="card__footer">
-              <h2 class="card__heading">Сундуки</h2>
-              <button type="button" class="card__like-button">
-              </button>
-            </div>
-          </li>
-          <li class="card">
-            <div class="card__image-wrapper">
-              <img src="./images/hayirakan.jpeg" alt="Крыши домов на фоне горы" class="card__image">
-            </div>
-            <div class="card__footer">
-              <h2 class="card__heading">Хаыйракан</h2>
-              <button type="button" class="card__like-button">
-              </button>
-            </div>
-          </li>
-          <li class="card">
-            <div class="card__image-wrapper">
-              <img src="./images/sayano-shushenskaya-ges.jpg" alt="Саяно-Шушенское водохранилище" class="card__image">
-            </div>
-            <div class="card__footer">
-              <h2 class="card__heading">Саяно-Шушенская ГЭС</h2>
-              <button type="button" class="card__like-button">
-              </button>
-            </div>
-          </li>
-          <li class="card">
-            <div class="card__image-wrapper">
-              <img src="./images/lenskie-stolby.jpeg" alt="Водоём на фоне гряды горных пиков, залитых закатным солнцем" class="card__image">
-            </div>
-            <div class="card__footer">
-              <h2 class="card__heading">Ленские столбы</h2>
-              <button type="button" class="card__like-button">
-              </button>
-            </div>
-          </li>
-          <li class="card">
-            <div class="card__image-wrapper">
-              <img src="./images/ergaki.jpg" alt="Вымощенная досками тропа в лесу" class="card__image">
-            </div>
-            <div class="card__footer">
-              <h2 class="card__heading">Ергаки</h2>
-              <button type="button" class="card__like-button">
-              </button>
-            </div>
-          </li>
-          <li class="card">
-            <div class="card__image-wrapper">
-              <img src="./images/kungurskaya-peshera.jpeg" alt="Человек с фаером в руке в зеве ледяной пещеры" class="card__image">
-            </div>
-            <div class="card__footer">
-              <h2 class="card__heading">Курганская пещера</h2>
-              <button type="button" class="card__like-button"></button>
-            </div>
-          </li>
+          <template class="elements__template">
+            <li class="card">
+              <div class="card__image-wrapper">
+                <img src="#" class="card__image">
+              </div>
+              <button type="button" class="card__remove-button"></button>
+              <div class="card__footer">
+                <h2 class="card__heading"></h2>
+                <button type="button" class="card__like-button">
+                </button>
+              </div>
+            </li>
+          </template>
         </ul>
       </section>
     </main>
@@ -107,6 +61,30 @@
         <input type="text" name="profileAbout" placeholder="О себе" class="popup__input">
         <button type="submit" class="popup__save-button">Сохранить</button>
       </form>
+    </div>
+  </div>
+
+  <div class="popup popup_add-card">
+    <div class="popup__container">
+      <button type="button" class="popup__close-button popup__close-button_add-card">
+      </button>
+      <h2 class="popup__title">Новое место</h2>
+      <form action="submit" name="addForm" class="popup__form popup__form_add-card">
+        <input type="text" name="cardName" placeholder="Название" class="popup__input">
+        <input type="text" name="cardLink" placeholder="Ссылка на картинку" class="popup__input">
+        <button type="submit" class="popup__save-button">Создать</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup_preview">
+    <div class="popup__container popup__container_preview">
+      <button type="button" class="popup__close-button popup__close-button_preview">
+      </button>
+      <figure class="preview">
+        <img src="#" alt="" class="preview__image">
+        <figcaption class="preview__caption"></figcaption>
+      </figure>
     </div>
   </div>
 
