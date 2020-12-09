@@ -33,16 +33,11 @@ function composeCard(item) {
   const newCard = templateCard.content.cloneNode(true);
   const cardHeading = newCard.querySelector('.card__heading');
   const cardImage = newCard.querySelector('.card__image');
+  const cardLikeButton = newCard.querySelector('.card__like-button');
   cardHeading.textContent = item.name;
   cardImage.alt = item.name;
   cardImage.src = item.link;
 
-  // лайк карточки
-  const cardLikeButton = newCard.querySelector('.card__like-button');
-  cardLikeButton.addEventListener('click', function (evt) {
-    const cardLikeToggle = evt.target;
-    cardLikeToggle.classList.toggle('card__like-button_active');
-  });
   // открытие предпросмотра изображения
   cardImage.addEventListener('click', function () {
     previewCaption.textContent = item.name;
@@ -50,6 +45,8 @@ function composeCard(item) {
     previewImage.src = item.link;
     popupPreview.classList.add('popup_opened');
   });
+
+  cardLikeButton.addEventListener('click', likeCard);
   addRemoveListenerToCard(newCard);
 
   return newCard;
@@ -85,6 +82,12 @@ function handleAddCardFormSubmit(evt) {
 function removeCard(evt) {
   const targetCard = evt.target.closest('.card');
   targetCard.remove();
+}
+
+// лайк карточки
+function likeCard(evt) {
+  const cardLikeToggle = evt.target;
+  cardLikeToggle.classList.toggle('card__like-button_active');
 }
 
 // обработчик события удаления карточки
