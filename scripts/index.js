@@ -67,7 +67,7 @@ function initAddNewCardPopup() {
   addCardButton.addEventListener('click', function () {
     cardNameInput.value = '';
     cardLinkInput.value = '';
-    popupAddCard.classList.add('popup_opened');
+    openPopup(popupAddCard);
   });
 }
 
@@ -75,7 +75,7 @@ function initAddNewCardPopup() {
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
   addNewCard();
-  popupAddCard.classList.remove('popup_opened');
+  closePopup(popupAddCard);
 }
 
 // удаление карточки
@@ -102,7 +102,7 @@ function initEditProfilePopup() {
   profileEditButton.addEventListener('click', function () {
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
-  anyPopup.classList.add('popup_opened');
+  openPopup(popupEditProfile);
   });
 }
 
@@ -111,7 +111,12 @@ function handleEditProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileAbout.textContent = aboutInput.value;
-  anyPopup.classList.remove('popup_opened');
+  closePopup(popupEditProfile);
+}
+
+// открытие попапа
+function openPopup(anyPopup) {
+  anyPopup.classList.add('popup_opened');
 }
 
 // закрытие попапа
