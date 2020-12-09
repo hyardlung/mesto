@@ -33,6 +33,7 @@ function composeCard(item) {
   const cardHeading = newCard.querySelector('.card__heading');
   const cardImage = newCard.querySelector('.card__image');
   cardHeading.textContent = item.name;
+  cardImage.alt = item.name;
   cardImage.src = item.link;
 
   // лайк карточки
@@ -44,6 +45,7 @@ function composeCard(item) {
   // открытие предпросмотра изображения
   cardImage.addEventListener('click', function () {
     previewCaption.textContent = item.name;
+    previewImage.alt = item.name;
     previewImage.src = item.link;
     popupPreview.classList.add('popup_opened');
   });
