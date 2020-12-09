@@ -52,21 +52,24 @@ function composeCard(item) {
   return newCard;
 }
 
+// сброс полей попапа добавления карточки на значения по умолчанию
+function resetPopupForm() {
+  popupFormAddCard.reset();
+}
+
 // добавление новых карточек
 function addNewCard () {
   const cardName = cardNameInput.value;
   const cardLink = cardLinkInput.value;
   const addNewCard = composeCard({name: cardName, link: cardLink});
   cardsContainerElement.prepend(addNewCard);
-  cardNameInput.value = '';
-  cardLinkInput.value = '';
+  resetPopupForm();
 }
 
 // инициализация попапа добавления карточки
 function initAddNewCardPopup() {
   addCardButton.addEventListener('click', function () {
-    cardNameInput.value = '';
-    cardLinkInput.value = '';
+    resetPopupForm();
     openPopup(popupAddCard);
   });
 }
