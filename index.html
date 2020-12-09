@@ -57,8 +57,8 @@
       </button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form action="submit" name="profileForm" class="popup__form">
-        <input type="text" name="profileName" placeholder="Ваше имя" class="popup__input">
-        <input type="text" name="profileAbout" placeholder="О себе" class="popup__input">
+        <input type="text" name="profileName" placeholder="Ваше имя" class="popup__input" required>
+        <input type="text" name="profileAbout" placeholder="О себе" class="popup__input" required>
         <button type="submit" class="popup__save-button">Сохранить</button>
       </form>
     </div>
@@ -70,8 +70,8 @@
       </button>
       <h2 class="popup__title">Новое место</h2>
       <form action="submit" name="addForm" class="popup__form popup__form_add-card">
-        <input type="text" name="cardName" placeholder="Название" class="popup__input">
-        <input type="text" name="cardLink" placeholder="Ссылка на картинку" class="popup__input">
+        <input type="text" name="cardName" placeholder="Название" class="popup__input" required>
+        <input type="url" name="cardLink" placeholder="Ссылка на картинку" class="popup__input" required>
         <button type="submit" class="popup__save-button">Создать</button>
       </form>
     </div>
