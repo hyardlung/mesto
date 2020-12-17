@@ -72,10 +72,14 @@
       <button type="button" class="popup__close-button popup__close-button_add-card">
       </button>
       <h2 class="popup__title">Новое место</h2>
-      <form action="submit" name="addForm" class="popup__form popup__form_add-card">
-        <input type="text" name="cardName" placeholder="Название" class="popup__input" required>
-        <input type="url" name="cardLink" placeholder="Ссылка на картинку" class="popup__input" required>
-        <button type="submit" class="popup__save-button">Создать</button>
+      <form action="submit" name="addForm" class="popup__form popup__form_add-card" novalidate>
+        <fieldset class="popup__form-fieldset">
+          <input type="text" name="cardName" placeholder="Название" class="popup__input" id="card-name-input" minlength="2" maxlength="30" required>
+          <span class="popup__input-error card-name-input-error"></span>
+          <input type="url" name="cardLink" placeholder="Ссылка на картинку" class="popup__input" id="card-link-input" required>
+          <span class="popup__input-error card-link-input-error"></span>
+          <button type="submit" class="popup__save-button">Создать</button>
+        </fieldset>
       </form>
     </div>
   </div>
