@@ -16,7 +16,6 @@ const cardLinkInput = document.querySelector('.popup__input[name="cardLink"]');
 const previewImage = popupPreview.querySelector('.preview__image');
 const previewCaption = popupPreview.querySelector('.preview__caption');
 
-const popupForm = document.querySelector('.popup__form');
 const popupFormAddCard = document.querySelector('.popup__form_add-card');
 
 const cardsContainerElement = document.querySelector('.elements__list');
@@ -134,7 +133,7 @@ popupCloseButtons.forEach((closeButton) => {
   });
 })
 
-popupForm.addEventListener('submit', handleEditProfileFormSubmit);
+formElement.addEventListener('submit', handleEditProfileFormSubmit);
 popupFormAddCard.addEventListener('submit', handleAddCardFormSubmit);
 
 renderList();
