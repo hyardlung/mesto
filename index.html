@@ -51,15 +51,18 @@
     </footer>
   </div>
 
-  <div class="popup">
+  <div class="popup popup_edit-profile">
     <div class="popup__container">
-      <button type="button" class="popup__close-button">
-      </button>
+      <button type="button" class="popup__close-button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form action="submit" name="profileForm" class="popup__form">
-        <input type="text" name="profileName" placeholder="Ваше имя" class="popup__input">
-        <input type="text" name="profileAbout" placeholder="О себе" class="popup__input">
-        <button type="submit" class="popup__save-button">Сохранить</button>
+      <form action="submit" name="profileForm" class="popup__form" novalidate>
+        <fieldset class="popup__form-fieldset">
+          <input type="text" name="profileName" placeholder="Ваше имя" class="popup__input" id="profile-name-input" minlength="2" maxlength="40" required>
+          <span class="popup__input-error profile-name-input-error"></span>
+          <input type="text" name="profileAbout" placeholder="О себе" class="popup__input" id="profile-about-input" minlength="2" maxlength="200" required>
+          <span class="popup__input-error profile-about-input-error"></span>
+          <button type="submit" class="popup__save-button">Сохранить</button>
+        </fieldset>
       </form>
     </div>
   </div>
@@ -70,8 +73,8 @@
       </button>
       <h2 class="popup__title">Новое место</h2>
       <form action="submit" name="addForm" class="popup__form popup__form_add-card">
-        <input type="text" name="cardName" placeholder="Название" class="popup__input">
-        <input type="text" name="cardLink" placeholder="Ссылка на картинку" class="popup__input">
+        <input type="text" name="cardName" placeholder="Название" class="popup__input" required>
+        <input type="url" name="cardLink" placeholder="Ссылка на картинку" class="popup__input" required>
         <button type="submit" class="popup__save-button">Создать</button>
       </form>
     </div>
@@ -88,6 +91,8 @@
     </div>
   </div>
 
-  <script src="./index.js"></script>
+  <script src="scripts/validate.js"></script>
+  <script src="scripts/initial-cards.js"></script>
+  <script src="scripts/index.js"></script>
 </body>
 </html>
