@@ -1,6 +1,7 @@
 const formElement = document.querySelector('.popup__form');
 const inputElement = formElement.querySelector('.popup__input');
 const inputList = formElement.querySelectorAll('.popup__input');
+const submitButton = formElement.querySelector('.popup__save-button');
 
 // показать красный нижний бордер и текст при ошибке валидации инпута
 function showInputError(form, input) {
@@ -25,10 +26,21 @@ function isValid(checkForm, checkInput) {
   }
 }
 
+function setButtonState(button, isActive) {
+  if (!isActive) {
+    button.classList.add('popup__save-button_invalid');
+    button.disabled = true;
+  } else {
+    button.classList.remove('popup__save-button_invalid');
+    button.disabled = false;
+  }
+}
+
 // слушатель с проверкой валидности для каждого импута
 inputList.forEach(currentInput => {
   currentInput.addEventListener('input', (evt) => {
     isValid(formElement, currentInput);
+    setButtonState(submitButton, formElement.checkValidity());
   })
 })
 
