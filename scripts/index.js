@@ -1,4 +1,4 @@
-const anyPopup = document.querySelector('.popup');
+const activePopup = document.querySelector('.popup');
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupAddCard = document.querySelector('.popup_add-card');
 const popupPreview = document.querySelector('.popup_preview');
@@ -117,13 +117,13 @@ function handleEditProfileFormSubmit(evt) {
 }
 
 // открытие попапа
-function openPopup(anyPopup) {
-  anyPopup.classList.add('popup_opened');
+function openPopup(activePopup) {
+  activePopup.classList.add('popup_opened');
 }
 
 // закрытие попапа
-function closePopup(anyPopup) {
-  anyPopup.classList.remove('popup_opened');
+function closePopup(activePopup) {
+  activePopup.classList.remove('popup_opened');
 }
 
 // обработчик клика по крестику
