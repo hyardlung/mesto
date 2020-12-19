@@ -1,7 +1,4 @@
 const formElement = document.querySelector('.popup__form');
-const inputElement = formElement.querySelector('.popup__input');
-const inputList = formElement.querySelectorAll('.popup__input');
-const submitButton = formElement.querySelector('.popup__save-button');
 
 // показать красный нижний бордер и текст при ошибке валидации инпута
 function showInputError(form, input) {
@@ -37,17 +34,22 @@ function setButtonState(button, isActive) {
   }
 }
 
-// слушатель с проверкой валидности для каждого импута
-inputList.forEach(currentInput => {
-  currentInput.addEventListener('input', (evt) => {
-    isValid(formElement, currentInput);
-    setButtonState(submitButton, formElement.checkValidity());
+// валидация формы
+function setEventListener(form) {
+  const inputList = form.querySelectorAll('.popup__input');
+  const submitButton = form.querySelector('.popup__save-button');
+  // слушатель с проверкой валидности для каждого импута
+  inputList.forEach(currentInput => {
+    currentInput.addEventListener('input', (evt) => {
+      isValid(form, currentInput);
+      setButtonState(submitButton, form.checkValidity());
+    })
   })
-})
+}
 
 // сброс дефолтного поведения
 formElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
 });
 
-
+setEventListener(formElement)
