@@ -47,9 +47,20 @@ function setEventListener(form) {
   })
 }
 
-// сброс дефолтного поведения
-formElement.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-});
 
-setEventListener(formElement)
+// применение валидации к открытой форме
+function enableValidation() {
+  const forms = document.querySelectorAll('.popup__form');
+  forms.forEach(form => {
+    setEventListener(form);
+    // сброс дефолтного поведения
+    form.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+    // проверка состояния кнопки при открытии формы
+    const submitButton = form.querySelector('.popup__save-button');
+    setButtonState(submitButton, form.checkValidity());
+  });
+}
+
+enableValidation()
