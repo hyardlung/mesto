@@ -1,57 +1,40 @@
 const formElement = document.querySelector('.popup__form');
-const formInput = formElement.querySelector('.popup__input');
+const inputElement = formElement.querySelector('.popup__input');
+const inputList = formElement.querySelectorAll('.popup__input');
 
-// показать красный нижний бордер при ошибке валидации инпута
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('popup__input_type_error');
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__input-error_active');
-};
+// показать красный нижний бордер и текст при ошибке валидации инпута
+function showInputError(form, input) {
+  const errorElement = form.querySelector(`#${input.id}-error`);
+  errorElement.textContent = input.validationMessage;
+  input.classList.add('popup__input_state_invalid');
+}
 
-// скрыть тот же бордер при пройденной валидации
-const hideInputError = (inputElement) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('popup__input_type_error');
-  errorElement.classList.remove('popup__input-error_active');
+// скрыть тот же бордер и текст ошибки при пройденной валидации
+function hideInputError(form, input) {
+  const errorElement = form.querySelector(`#${input.id}-error`);
   errorElement.textContent = '';
-};
+  input.classList.remove('popup__input_state_invalid');
+}
 
 // проверка валидности поля
-const isValid = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+function isValid(checkForm, checkInput) {
+  if (!checkInput.validity.valid) {
+    showInputError(checkForm, checkInput)
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(checkForm, checkInput);
   }
-};
-
-// добавление обработчиков всем полям формы
-const setEventListener = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement);
-    });
-  });
-};
-
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
-  formList.forEach((formElement) => {
-    formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
-    setEventListener(formElement);
-  });
 }
-enableValidation();
 
+// слушатель с проверкой валидности для каждого импута
+inputList.forEach(currentInput => {
+  currentInput.addEventListener('input', (evt) => {
+    isValid(formElement, currentInput);
+  })
+})
 
-//отмена стандартного поведения формы
+// сброс дефолтного поведения
 formElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
 });
 
-//проверяем инпуты при вводе символов
-formInput.addEventListener('input', isValid);
+
