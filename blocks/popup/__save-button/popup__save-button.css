@@ -1,7 +1,7 @@
 .popup__save-button {
   display: block;
   width: 100%;
-  margin-top: 48px;
+  margin-top: 12px;
   padding: 15px 0 14px;
   font-size: 18px;
   line-height: 1.22;
@@ -12,7 +12,7 @@
   cursor: pointer;
 }
 
-.popup__save-button:hover {
+.popup__save-button:hover:enabled {
   opacity: .8;
 }
 

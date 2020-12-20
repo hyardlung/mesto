@@ -1,4 +1,4 @@
-const anyPopup = document.querySelector('.popup');
+const popup = document.querySelector('.popup');
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupAddCard = document.querySelector('.popup_add-card');
 const popupPreview = document.querySelector('.popup_preview');
@@ -16,7 +16,6 @@ const cardLinkInput = document.querySelector('.popup__input[name="cardLink"]');
 const previewImage = popupPreview.querySelector('.preview__image');
 const previewCaption = popupPreview.querySelector('.preview__caption');
 
-const popupForm = document.querySelector('.popup__form');
 const popupFormAddCard = document.querySelector('.popup__form_add-card');
 
 const cardsContainerElement = document.querySelector('.elements__list');
@@ -43,7 +42,7 @@ function composeCard(item) {
     previewCaption.textContent = item.name;
     previewImage.alt = item.name;
     previewImage.src = item.link;
-    popupPreview.classList.add('popup_opened');
+    openPopup(popupPreview);
   });
 
   cardLikeButton.addEventListener('click', likeCard);
@@ -118,13 +117,33 @@ function handleEditProfileFormSubmit(evt) {
 }
 
 // открытие попапа
-function openPopup(anyPopup) {
-  anyPopup.classList.add('popup_opened');
+function openPopup(popup) {
+  document.addEventListener('keydown', closeByPressingEscape);
+  document.addEventListener('click', closeByClickingOverlay);
+  popup.classList.add('popup_opened');
 }
 
 // закрытие попапа
-function closePopup(anyPopup) {
-  anyPopup.classList.remove('popup_opened');
+function closePopup(popup) {
+  document.removeEventListener('keydown', closeByPressingEscape);
+  document.removeEventListener('click', closeByClickingOverlay);
+  popup.classList.remove('popup_opened');
+}
+
+// закрытие попапа по нажатию на Esc
+function closeByPressingEscape(evt) {
+  if (evt.key === 'Escape') {
+    const activePopup = document.querySelector('.popup_opened');
+    closePopup(activePopup);
+  }
+}
+
+// закрытие попапа по клику мимо окна
+function closeByClickingOverlay(evt) {
+  if (evt.target.classList.contains('popup_opened')) {
+    const activePopup = document.querySelector('.popup_opened');
+    closePopup(activePopup);
+  }
 }
 
 // обработчик клика по крестику
@@ -134,7 +153,7 @@ popupCloseButtons.forEach((closeButton) => {
   });
 })
 
-popupForm.addEventListener('submit', handleEditProfileFormSubmit);
+formElement.addEventListener('submit', handleEditProfileFormSubmit);
 popupFormAddCard.addEventListener('submit', handleAddCardFormSubmit);
 
 renderList();
