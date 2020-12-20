@@ -47,7 +47,6 @@ function setEventListener(form, config) {
   })
 }
 
-
 // применение валидации к открытой форме
 function enableValidation(config) {
   const forms = document.querySelectorAll(config.formSelector);
