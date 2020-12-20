@@ -119,18 +119,28 @@ function handleEditProfileFormSubmit(evt) {
 // открытие попапа
 function openPopup(popup) {
   document.addEventListener('keydown', closeByPressingEscape);
+  document.addEventListener('click', closeByClickingOverlay);
   popup.classList.add('popup_opened');
 }
 
 // закрытие попапа
 function closePopup(popup) {
   document.removeEventListener('keydown', closeByPressingEscape);
+  document.removeEventListener('click', closeByClickingOverlay);
   popup.classList.remove('popup_opened');
 }
 
 // закрытие попапа по нажатию на Esc
 function closeByPressingEscape(evt) {
   if (evt.key === 'Escape') {
+    const activePopup = document.querySelector('.popup_opened');
+    closePopup(activePopup);
+  }
+}
+
+// закрытие попапа по клику мимо окна
+function closeByClickingOverlay(evt) {
+  if (evt.target.classList.contains('popup_opened')) {
     const activePopup = document.querySelector('.popup_opened');
     closePopup(activePopup);
   }
