@@ -1,4 +1,3 @@
-const popup = document.querySelector('.popup');
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupAddCard = document.querySelector('.popup_add-card');
 const popupPreview = document.querySelector('.popup_preview');
