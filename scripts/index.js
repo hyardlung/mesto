@@ -1,6 +1,6 @@
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupAddCard = document.querySelector('.popup_add-card');
-const popupPreview = document.querySelector('.popup_preview');
+
 const popupCloseButtons = [...document.querySelectorAll('.popup__close-button')];
 
 const nameInput = document.querySelector('.popup__input[name="profileName"]');
@@ -11,9 +11,6 @@ const profileAbout = document.querySelector('.profile__about');
 const addCardButton = document.querySelector('.profile__add-button');
 const cardNameInput = document.querySelector('.popup__input[name="cardName"]');
 const cardLinkInput = document.querySelector('.popup__input[name="cardLink"]');
-
-const previewImage = popupPreview.querySelector('.preview__image');
-const previewCaption = popupPreview.querySelector('.preview__caption');
 
 const popupFormAddCard = document.querySelector('.popup__form_add-card');
 
@@ -162,16 +159,22 @@ const cardsContainerElement = document.querySelector('.elements__list');
 
 
 
+
+const popupPreview = document.querySelector('.popup_preview');
+const previewImage = popupPreview.querySelector('.preview__image');
+const previewCaption = popupPreview.querySelector('.preview__caption');
+const previewCloseButton = popupPreview.querySelector('.popup__close-button_preview');
 class Card {
-  constructor(link, name) {
-    this._link = link;
-    this._name = name;
+  constructor(data, cardSelector) {
+    this._link = data.link;
+    this._name = data.name;
+    this._cardSelector = cardSelector;
   }
 
   // забираем размеку из HTML и клонируем элемент
   _getTemplate() {
   	const templateCard = document
-      .querySelector('.elements__template')
+      .querySelector(this._cardSelector)
       .content
       .querySelector('.card')
       .cloneNode(true);
@@ -184,16 +187,41 @@ class Card {
     // Запишем разметку в приватное поле _element.
     // Так у других элементов появится доступ к ней.
     this._element = this._getTemplate();
+    this._setEventListeners();
     // Добавим данные
     this._element.querySelector('.card__image').src = this._link;
     this._element.querySelector('.card__heading').textContent = this._name;
     // Вернём элемент наружу
     return this._element;
   }
+
+  // открытие предпросмотра изображения
+  _handleOpenPopup() {
+    previewImage.src = this._link;
+    previewCaption.textContent = this._name;
+    popupPreview.classList.add('popup_opened');
+  }
+
+  // закрытие предпросмотра по клику на крестик
+  _handleClosePopup() {
+    previewImage.src = '';
+    previewCaption.textContent = '';
+    popupPreview.classList.remove('popup_opened');
+  }
+
+  // слушатели кликов открытия и закрытия предпросмотра
+  _setEventListeners() {
+    this._element.addEventListener('click', () => {
+      this._handleOpenPopup();
+    })
+    previewCloseButton.addEventListener('click', () => {
+      this._handleClosePopup();
+    })
+  }
 }
 
 initialCards.forEach((item) => {
-  const card = new Card(item.link, item.name);
+  const card = new Card(item, '.elements__template');
   const cardElement = card.generateCard();
   document.querySelector('.elements__list').append(cardElement);
 })
