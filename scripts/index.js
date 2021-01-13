@@ -154,7 +154,6 @@ const cardsContainerElement = document.querySelector('.elements__list');
 // formElement.addEventListener('submit', handleEditProfileFormSubmit);
 // popupFormAddCard.addEventListener('submit', handleAddCardFormSubmit);
 
-// renderList();
 // initEditProfilePopup();
 // initAddNewCardPopup();
 
