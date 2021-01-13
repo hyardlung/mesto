@@ -51,6 +51,11 @@ export default class Card {
     evt.target.classList.toggle('card__like-button_active');
   }
 
+  // удаление карточки
+  _removeCard(evt) {
+    evt.target.closest('.card').remove();
+  }
+
   // слушатели кликов
   _setEventListeners() {
     this._element.querySelector('.card__image').addEventListener('click', () => {
@@ -61,6 +66,9 @@ export default class Card {
     })
     this._element.querySelector('.card__like-button').addEventListener('click', (evt) => {
       this._cardLikeToggle(evt);
+    })
+    this._element.querySelector('.card__remove-button').addEventListener('click', (evt) => {
+      this._removeCard(evt);
     })
   }
 }
