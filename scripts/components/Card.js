@@ -1,4 +1,5 @@
 const popupPreview = document.querySelector('.popup_preview');
+
 const previewImage = popupPreview.querySelector('.preview__image');
 const previewCaption = popupPreview.querySelector('.preview__caption');
 const previewCloseButton = popupPreview.querySelector('.popup__close-button_preview');

@@ -49,10 +49,10 @@ const cardsContainerElement = document.querySelector('.elements__list');
 //   return newCard;
 // }
 
-// // сброс полей попапа добавления карточки на значения по умолчанию
-// function resetPopupForm() {
-//   popupFormAddCard.reset();
-// }
+// сброс полей попапа добавления карточки на значения по умолчанию
+function resetPopupForm() {
+  popupFormAddCard.reset();
+}
 
 // // добавление новых карточек
 // function addNewCard () {
@@ -63,13 +63,13 @@ const cardsContainerElement = document.querySelector('.elements__list');
 //   resetPopupForm();
 // }
 
-// // инициализация попапа добавления карточки
-// function initAddNewCardPopup() {
-//   addCardButton.addEventListener('click', function () {
-//     resetPopupForm();
-//     openPopup(popupAddCard);
-//   });
-// }
+// инициализация попапа добавления карточки
+function initAddNewCardPopup() {
+  addCardButton.addEventListener('click', function () {
+    resetPopupForm();
+    openPopup(popupAddCard);
+  });
+}
 
 // // подтверждение создания карточки
 // function handleAddCardFormSubmit(evt) {
@@ -78,84 +78,66 @@ const cardsContainerElement = document.querySelector('.elements__list');
 //   closePopup(popupAddCard);
 // }
 
-// // удаление карточки
-// function removeCard(evt) {
-//   const targetCard = evt.target.closest('.card');
-//   targetCard.remove();
-// }
+// инициализация попапа редактирования профиля
+function initEditProfilePopup() {
+  const profileEditButton = document.querySelector('.profile__edit-button');
+  profileEditButton.addEventListener('click', function () {
+  nameInput.value = profileName.textContent;
+  aboutInput.value = profileAbout.textContent;
+  openPopup(popupEditProfile);
+  });
+}
 
-// // лайк карточки
-// function likeCard(evt) {
-//   const cardLikeToggle = evt.target;
-//   cardLikeToggle.classList.toggle('card__like-button_active');
-// }
+// сохранение данных в профиле
+function handleEditProfileFormSubmit(evt) {
+  evt.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileAbout.textContent = aboutInput.value;
+  closePopup(popupEditProfile);
+}
 
-// // обработчик события удаления карточки
-// function addRemoveListenerToCard(item) {
-//   const removeButton = item.querySelector('.card__remove-button');
-//   removeButton.addEventListener('click', removeCard);
-// }
+// открытие попапа
+function openPopup(popup) {
+  document.addEventListener('keydown', closeByPressingEscape);
+  document.addEventListener('click', closeByClickingOverlay);
+  popup.classList.add('popup_opened');
+}
 
-// // инициализация попапа редактирования профиля
-// function initEditProfilePopup() {
-//   const profileEditButton = document.querySelector('.profile__edit-button');
-//   profileEditButton.addEventListener('click', function () {
-//   nameInput.value = profileName.textContent;
-//   aboutInput.value = profileAbout.textContent;
-//   openPopup(popupEditProfile);
-//   });
-// }
+// закрытие попапа
+function closePopup(popup) {
+  document.removeEventListener('keydown', closeByPressingEscape);
+  document.removeEventListener('click', closeByClickingOverlay);
+  popup.classList.remove('popup_opened');
+}
 
-// // сохранение данных в профиле
-// function handleEditProfileFormSubmit(evt) {
-//   evt.preventDefault();
-//   profileName.textContent = nameInput.value;
-//   profileAbout.textContent = aboutInput.value;
-//   closePopup(popupEditProfile);
-// }
+// закрытие попапа по нажатию на Esc
+function closeByPressingEscape(evt) {
+  if (evt.key === 'Escape') {
+    const activePopup = document.querySelector('.popup_opened');
+    closePopup(activePopup);
+  }
+}
 
-// // открытие попапа
-// function openPopup(popup) {
-//   document.addEventListener('keydown', closeByPressingEscape);
-//   document.addEventListener('click', closeByClickingOverlay);
-//   popup.classList.add('popup_opened');
-// }
+// закрытие попапа по клику мимо окна
+function closeByClickingOverlay(evt) {
+  if (evt.target.classList.contains('popup_opened')) {
+    const activePopup = document.querySelector('.popup_opened');
+    closePopup(activePopup);
+  }
+}
 
-// // закрытие попапа
-// function closePopup(popup) {
-//   document.removeEventListener('keydown', closeByPressingEscape);
-//   document.removeEventListener('click', closeByClickingOverlay);
-//   popup.classList.remove('popup_opened');
-// }
+// обработчик клика по крестику
+popupCloseButtons.forEach((closeButton) => {
+  closeButton.addEventListener('click', function (evt) {
+    closePopup(evt.target.closest('.popup'));
+  });
+})
 
-// // закрытие попапа по нажатию на Esc
-// function closeByPressingEscape(evt) {
-//   if (evt.key === 'Escape') {
-//     const activePopup = document.querySelector('.popup_opened');
-//     closePopup(activePopup);
-//   }
-// }
-
-// // закрытие попапа по клику мимо окна
-// function closeByClickingOverlay(evt) {
-//   if (evt.target.classList.contains('popup_opened')) {
-//     const activePopup = document.querySelector('.popup_opened');
-//     closePopup(activePopup);
-//   }
-// }
-
-// // обработчик клика по крестику
-// popupCloseButtons.forEach((closeButton) => {
-//   closeButton.addEventListener('click', function (evt) {
-//     closePopup(evt.target.closest('.popup'));
-//   });
-// })
-
-// formElement.addEventListener('submit', handleEditProfileFormSubmit);
+formElement.addEventListener('submit', handleEditProfileFormSubmit);
 // popupFormAddCard.addEventListener('submit', handleAddCardFormSubmit);
 
-// initEditProfilePopup();
-// initAddNewCardPopup();
+initEditProfilePopup();
+initAddNewCardPopup();
 
 
 initialCards.forEach((item) => {
