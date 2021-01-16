@@ -6,8 +6,8 @@ const previewCloseButton = popupPreview.querySelector('.popup__close-button_prev
 
 export default class Card {
   constructor(data, cardSelector) {
-    this._image = data.image;
     this._name = data.name;
+    this._image = data.image;
     this._cardSelector = cardSelector;
   }
 
@@ -29,16 +29,16 @@ export default class Card {
     this._element = this._getTemplate();
     this._setEventListeners();
     // Добавим данные
-    this._element.querySelector('.card__image').src = this._image;
     this._element.querySelector('.card__heading').textContent = this._name;
+    this._element.querySelector('.card__image').src = this._image;
     // Вернём элемент наружу
     return this._element;
   }
 
   // открытие предпросмотра изображения
   _handleOpenPreview() {
-    previewImage.src = this._image;
     previewCaption.textContent = this._name;
+    previewImage.src = this._image;
     popupPreview.classList.add('popup_opened');
   }
 
