@@ -1,3 +1,5 @@
+import {openPopup} from '../index.js'
+
 const popupPreview = document.querySelector('.popup_preview');
 const previewImage = popupPreview.querySelector('.preview__image');
 const previewCaption = popupPreview.querySelector('.preview__caption');
@@ -25,7 +27,7 @@ export default class Card {
     previewImage.src = this._image;
     previewImage.alt = this._name;
     previewCaption.textContent = this._name;
-    popupPreview.classList.add('popup_opened');
+    openPopup(popupPreview);
   }
 
   // лайк карточки (вкл/выкл)
