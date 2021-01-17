@@ -3,18 +3,22 @@ import Card from './components/Card.js'
 
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupAddCard = document.querySelector('.popup_add-card');
+const popupPreview = document.querySelector('.popup_preview');
+
+const previewImage = popupPreview.querySelector('.preview__image');
+const previewCaption = popupPreview.querySelector('.preview__caption');
 
 const popupCloseButtons = [...document.querySelectorAll('.popup__close-button')];
 
 const nameInput = document.querySelector('.popup__input[name="profileName"]');
 const aboutInput = document.querySelector('.popup__input[name="profileAbout"]');
+const cardNameInput = document.querySelector('.popup__input[name="cardName"]');
+const cardImageInput = document.querySelector('.popup__input[name="cardImage"]');
+
 const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
 
 const addCardButton = document.querySelector('.profile__add-button');
-const cardNameInput = document.querySelector('.popup__input[name="cardName"]');
-const cardImageInput = document.querySelector('.popup__input[name="cardImage"]');
-
 const popupFormAddCard = document.querySelector('.popup__form_add-card');
 
 const cardsContainerElement = document.querySelector('.elements__list');
@@ -25,6 +29,24 @@ initialCards.forEach((item) => {
   const cardElement = card.generateCard();
   document.querySelector('.elements__list').append(cardElement);
 })
+
+// открытие предпросмотра изображения
+/* TODO: картинка, по которой производится клик, открывается в попапе предпросмотра,
+*   но описание под картинкой не подтягивается из cardHeading.
+*   Нужно разобраться, почему туда попадает undefined и как это исправить
+*/
+function handleOpenPreview() {
+  const cardHeadings = [...document.querySelectorAll('.card__heading')];
+  const cardImages = [...document.querySelectorAll('.card__image')];
+  cardImages.forEach((cardImage) => {
+    cardImage.addEventListener('click', (evt) => {
+      previewImage.src = cardImage.src;
+      previewImage.alt = cardImage.alt;
+      previewCaption.textContent = cardHeadings.textContent;
+      openPopup(popupPreview);
+    });
+  })
+}
 
 // первоначальный рендер списка карточек
 // function renderList() {
@@ -146,3 +168,4 @@ popupFormAddCard.addEventListener('submit', handleAddCardFormSubmit);
 
 initEditProfilePopup();
 initAddNewCardPopup();
+handleOpenPreview();
