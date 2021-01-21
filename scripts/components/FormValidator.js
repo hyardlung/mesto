@@ -2,6 +2,7 @@ export default class FormValidator {
   constructor(setOfValidationsParams, formElement) {
     this._setOfValidationsParams = setOfValidationsParams;
     this._formElement = formElement;
+    this._submitButton = formElement.querySelector(this._setOfValidationsParams.submitButtonSelector);
   }
 
   // показать красный нижний бордер и текст при ошибке валидации инпута
@@ -41,12 +42,11 @@ export default class FormValidator {
   // валидация формы
   _setEventListener(form) {
     const inputList = form.querySelectorAll(this._setOfValidationsParams.inputSelector);
-    const submitButton = form.querySelector(this._setOfValidationsParams.submitButtonSelector);
     // слушатель с проверкой валидности для каждого импута
     inputList.forEach(currentInput => {
       currentInput.addEventListener('input', () => {
         this._isValid(form, currentInput);
-        this._setButtonState(submitButton, form.checkValidity());
+        this._setButtonState(this._submitButton, form.checkValidity());
       })
     })
   }
