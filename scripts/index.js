@@ -34,14 +34,14 @@ initialCards.forEach((item) => {
 })
 
 // сброс полей попапа добавления карточки на значения по умолчанию
-function resetPopupForm() {
+function resetPopupFormAddCard() {
   popupFormAddCard.reset();
 }
 
 // инициализация попапа добавления карточки
 function initAddNewCardPopup() {
   addCardButton.addEventListener('click', () => {
-    resetPopupForm();
+    resetPopupFormAddCard();
     openPopup(popupAddCard);
   });
 }
@@ -53,7 +53,7 @@ function addNewCard() {
   const card = new Card({name: cardName, image: cardImage}, '.elements__template');
   const cardElement = card.generateCard();
   cardsContainerElement.prepend(cardElement);
-  resetPopupForm();
+  resetPopupFormAddCard();
 }
 
 // подтверждение создания карточки
