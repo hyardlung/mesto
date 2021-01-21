@@ -5,8 +5,6 @@ import Card from './components/Card.js'
 
 const popupCloseButtons = [...document.querySelectorAll('.popup__close-button')];
 
-const formElement = document.querySelector('.popup__form');
-
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupFormEditProfile = popupEditProfile.querySelector('.popup__form_edit-profile');
 const nameInput = popupFormEditProfile.querySelector('.popup__input[name="profileName"]');
@@ -118,7 +116,7 @@ popupCloseButtons.forEach((closeButton) => {
   });
 })
 
-formElement.addEventListener('submit', handleEditProfileFormSubmit);
+popupFormEditProfile.addEventListener('submit', handleEditProfileFormSubmit);
 popupFormAddCard.addEventListener('submit', handleAddCardFormSubmit);
 
 initEditProfilePopup();

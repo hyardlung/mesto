@@ -6,47 +6,47 @@ export default class FormValidator {
   }
 
   // показать красный нижний бордер и текст при ошибке валидации инпута
-  _showInputError(form, input) {
-    const errorElement = form.querySelector(`#${input.id}-error`);
+  _showInputError(input) {
+    const errorElement = this._formElement.querySelector(`#${input.id}-error`);
     errorElement.textContent = input.validationMessage;
     input.classList.add(this._setOfValidationsParams.inputInvalidClass);
   }
 
   // скрыть тот же бордер и текст ошибки при пройденной валидации
-  _hideInputError(form, input) {
-    const errorElement = form.querySelector(`#${input.id}-error`);
+  _hideInputError(input) {
+    const errorElement = this._formElement.querySelector(`#${input.id}-error`);
     errorElement.textContent = '';
     input.classList.remove(this._setOfValidationsParams.inputInvalidClass);
   }
 
   // проверка валидности поля
-  _isValid(checkForm, checkInput) {
+  _isValid(checkInput) {
     if (!checkInput.validity.valid) {
-      this._showInputError(checkForm, checkInput)
+      this._showInputError(checkInput);
     } else {
-      this._hideInputError(checkForm, checkInput);
+      this._hideInputError(checkInput);
     }
   }
 
   // проверка состояния кнопки submit
-  _setButtonState(button, isActive) {
-    if (!isActive) {
-      button.classList.add(this._setOfValidationsParams.buttonInvalidClass);
-      button.disabled = true;
+  _setButtonState() {
+    if (!this._formElement.checkValidity()) {
+      this._submitButton.classList.add(this._setOfValidationsParams.buttonInvalidClass);
+      this._submitButton.disabled = true;
     } else {
-      button.classList.remove(this._setOfValidationsParams.buttonInvalidClass);
-      button.disabled = false;
+      this._submitButton.classList.remove(this._setOfValidationsParams.buttonInvalidClass);
+      this._submitButton.disabled = false;
     }
   }
 
   // валидация формы
-  _setEventListener(form) {
-    const inputList = form.querySelectorAll(this._setOfValidationsParams.inputSelector);
+  _setEventListener() {
+    const inputList = this._formElement.querySelectorAll(this._setOfValidationsParams.inputSelector);
     // слушатель с проверкой валидности для каждого импута
     inputList.forEach(currentInput => {
       currentInput.addEventListener('input', () => {
-        this._isValid(form, currentInput);
-        this._setButtonState(this._submitButton, form.checkValidity());
+        this._isValid(currentInput);
+        this._setButtonState();
       })
     })
   }
