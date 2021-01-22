@@ -5,8 +5,6 @@ import Card from './components/Card.js'
 
 const popupCloseButtons = [...document.querySelectorAll('.popup__close-button')];
 
-const formElement = document.querySelector('.popup__form');
-
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupFormEditProfile = popupEditProfile.querySelector('.popup__form_edit-profile');
 const nameInput = popupFormEditProfile.querySelector('.popup__input[name="profileName"]');
@@ -34,14 +32,14 @@ initialCards.forEach((item) => {
 })
 
 // сброс полей попапа добавления карточки на значения по умолчанию
-function resetPopupForm() {
+function resetPopupFormAddCard() {
   popupFormAddCard.reset();
 }
 
 // инициализация попапа добавления карточки
 function initAddNewCardPopup() {
   addCardButton.addEventListener('click', () => {
-    resetPopupForm();
+    resetPopupFormAddCard();
     openPopup(popupAddCard);
   });
 }
@@ -53,7 +51,7 @@ function addNewCard() {
   const card = new Card({name: cardName, image: cardImage}, '.elements__template');
   const cardElement = card.generateCard();
   cardsContainerElement.prepend(cardElement);
-  resetPopupForm();
+  resetPopupFormAddCard();
 }
 
 // подтверждение создания карточки
@@ -118,7 +116,7 @@ popupCloseButtons.forEach((closeButton) => {
   });
 })
 
-formElement.addEventListener('submit', handleEditProfileFormSubmit);
+popupFormEditProfile.addEventListener('submit', handleEditProfileFormSubmit);
 popupFormAddCard.addEventListener('submit', handleAddCardFormSubmit);
 
 initEditProfilePopup();

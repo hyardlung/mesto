@@ -1,61 +1,70 @@
 export default class FormValidator {
-  constructor(setOfValidationsParams, formElement) {
-    this._setOfValidationsParams = setOfValidationsParams;
+  constructor(setOfValidationParams, formElement) {
+    this._setOfValidationParams = setOfValidationParams;
     this._formElement = formElement;
+    this._submitButton = formElement.querySelector(this._setOfValidationParams.submitButtonSelector);
   }
 
-  // показать красный нижний бордер и текст при ошибке валидации инпута
-  _showInputError(form, input) {
-    const errorElement = form.querySelector(`#${input.id}-error`);
+  // метод для проверки валидности поля
+  _isValid(input) {
+    if (!input.validity.valid) {
+      this._showInputError(input);
+    } else {
+      this._hideInputError(input);
+    }
+  }
+
+  // метод отображающий красный нижний бордер и текст при ошибке валидации инпута
+  _showInputError(input) {
+    const errorElement = this._formElement.querySelector(`#${input.id}-error`);
     errorElement.textContent = input.validationMessage;
-    input.classList.add(this._setOfValidationsParams.inputInvalidClass);
+    input.classList.add(this._setOfValidationParams.inputInvalidClass);
   }
 
-  // скрыть тот же бордер и текст ошибки при пройденной валидации
-  _hideInputError(form, input) {
-    const errorElement = form.querySelector(`#${input.id}-error`);
+  // метод скрывающий красный нижний бордер и текст ошибки при пройденной валидации
+  _hideInputError(input) {
+    const errorElement = this._formElement.querySelector(`#${input.id}-error`);
     errorElement.textContent = '';
-    input.classList.remove(this._setOfValidationsParams.inputInvalidClass);
+    input.classList.remove(this._setOfValidationParams.inputInvalidClass);
   }
 
-  // проверка валидности поля
-  _isValid(checkForm, checkInput) {
-    if (!checkInput.validity.valid) {
-      this._showInputError(checkForm, checkInput)
+  // метод меняющий состояние кнопки submit в зависимости от того, пройдена ли валидация
+  _setButtonState() {
+    if (!this._formElement.checkValidity()) {
+      this._submitButton.classList.add(this._setOfValidationParams.buttonInvalidClass);
+      this._submitButton.disabled = true;
     } else {
-      this._hideInputError(checkForm, checkInput);
+      this._submitButton.classList.remove(this._setOfValidationParams.buttonInvalidClass);
+      this._submitButton.disabled = false;
     }
   }
 
-  // проверка состояния кнопки submit
-  _setButtonState(button, isActive) {
-    if (!isActive) {
-      button.classList.add(this._setOfValidationsParams.buttonInvalidClass);
-      button.disabled = true;
-    } else {
-      button.classList.remove(this._setOfValidationsParams.buttonInvalidClass);
-      button.disabled = false;
-    }
-  }
+  // метод слушателей
+  _setEventListener() {
+    const inputList = this._formElement.querySelectorAll(this._setOfValidationParams.inputSelector);
 
-  // валидация формы
-  _setEventListener(form) {
-    const inputList = form.querySelectorAll(this._setOfValidationsParams.inputSelector);
-    const submitButton = form.querySelector(this._setOfValidationsParams.submitButtonSelector);
     // слушатель с проверкой валидности для каждого импута
     inputList.forEach(currentInput => {
       currentInput.addEventListener('input', () => {
-        this._isValid(form, currentInput);
-        this._setButtonState(submitButton, form.checkValidity());
-      })
-    })
+        this._isValid(currentInput);
+        this._setButtonState();
+      });
+    });
+    // слушатель сброса инпутов, ошибок валидации и состояния кнопки
+    this._formElement.addEventListener('reset', () => {
+      inputList.forEach((input) => {
+        this._hideInputError(input);
+        this._submitButton.classList.add(this._setOfValidationParams.buttonInvalidClass);
+        this._submitButton.disabled = true;
+      });
+    });
   }
 
   enableValidation() {
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
-
+    this._setButtonState();
     this._setEventListener(this._formElement);
   }
 }
