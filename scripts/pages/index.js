@@ -31,15 +31,10 @@ initialCards.forEach((item) => {
   cardsContainerElement.append(cardElement);
 })
 
-// сброс полей попапа добавления карточки на значения по умолчанию
-function resetPopupFormAddCard() {
-  popupFormAddCard.reset();
-}
-
 // инициализация попапа добавления карточки
 function initAddNewCardPopup() {
   addCardButton.addEventListener('click', () => {
-    resetPopupFormAddCard();
+    popupFormAddCard.reset();
     openPopup(popupAddCard);
   });
 }
@@ -51,7 +46,7 @@ function addNewCard() {
   const card = new Card({name: cardName, image: cardImage}, '.elements__template');
   const cardElement = card.generateCard();
   cardsContainerElement.prepend(cardElement);
-  resetPopupFormAddCard();
+  popupFormAddCard.reset();
 }
 
 // подтверждение создания карточки
@@ -65,6 +60,7 @@ function handleAddCardFormSubmit(evt) {
 function initEditProfilePopup() {
   const profileEditButton = document.querySelector('.profile__edit-button');
   profileEditButton.addEventListener('click', () => {
+  popupFormEditProfile.reset();
   nameInput.value = profileName.textContent;
   aboutInput.value = profileAbout.textContent;
   openPopup(popupEditProfile);
