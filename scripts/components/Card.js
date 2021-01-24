@@ -1,4 +1,4 @@
-import {openPopup} from '../index.js'
+import {openPopup} from '../pages/index.js'
 
 const popupPreview = document.querySelector('.popup_preview');
 const previewImage = popupPreview.querySelector('.preview__image');
@@ -11,7 +11,7 @@ export default class Card {
     this._cardSelector = cardSelector;
   }
 
-  // забираем разметку из HTML и клонируем элемент
+  // метод забирающий разметку из HTML и клонирующий элемент
   _getTemplate() {
     const cardTemplate = document
       .querySelector(this._cardSelector)
@@ -22,7 +22,7 @@ export default class Card {
     return cardTemplate;
   }
 
-  // открытие предпросмотра изображения
+  // метод открывающий предпросмотр изображения
   _handleOpenPreview() {
     previewImage.src = this._image;
     previewImage.alt = this._name;
@@ -30,30 +30,36 @@ export default class Card {
     openPopup(popupPreview);
   }
 
-  // лайк карточки (вкл/выкл)
+  // метод установки/снятия лайка карточки
   _cardLikeToggle(evt) {
     evt.target.classList.toggle('card__like-button_active');
   }
 
-  // удаление карточки
+  // метод удаления карточки
   _removeCard(evt) {
     evt.target.closest('.card').remove();
   }
 
   // слушатели кликов
   _setEventListeners() {
+
+    // слушатель клика по картинке карточки
     this._element.querySelector('.card__image').addEventListener('click', () => {
       this._handleOpenPreview();
-    })
+    });
+
+    // слушатель клика по кнопке лайка
     this._element.querySelector('.card__like-button').addEventListener('click', (evt) => {
       this._cardLikeToggle(evt);
-    })
+    });
+
+    // слушатель клика по корзине (кнопке удаления карточки)
     this._element.querySelector('.card__remove-button').addEventListener('click', (evt) => {
       this._removeCard(evt);
     })
   }
 
-  // подготовим карточку к публикации
+  // метод генерирующий карточку и готовящий её к публикации
   generateCard() {
     // Запишем разметку в приватное поле _element.
     // Так у других элементов появится доступ к ней.

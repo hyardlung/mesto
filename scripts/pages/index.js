@@ -1,7 +1,7 @@
-import { validationConfig } from './constants/validation-config.js'
-import { initialCards } from './constants/initial-cards.js'
-import FormValidator from './components/FormValidator.js';
-import Card from './components/Card.js'
+import { validationConfig } from '../constants/validation-config.js'
+import { initialCards } from '../constants/initial-cards.js'
+import FormValidator from '../components/FormValidator.js';
+import Card from '../components/Card.js'
 
 const popupCloseButtons = [...document.querySelectorAll('.popup__close-button')];
 
@@ -28,7 +28,7 @@ const addCardFormValidity = new FormValidator(validationConfig, popupFormAddCard
 initialCards.forEach((item) => {
   const card = new Card(item, '.elements__template');
   const cardElement = card.generateCard();
-  document.querySelector('.elements__list').append(cardElement);
+  cardsContainerElement.append(cardElement);
 })
 
 // сброс полей попапа добавления карточки на значения по умолчанию
