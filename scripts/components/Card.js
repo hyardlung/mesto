@@ -22,7 +22,7 @@ export default class Card {
     return cardTemplate;
   }
 
-  // метод открывающий предпросмотр изображения
+  // метод открывающий предпросмотр изображения         TODO: перенести в index.js, сделать функцией, которая передаётся параметром в конструктор чтобы избавиться от кольцевого импорта
   _handleOpenPreview() {
     previewImage.src = this._image;
     previewImage.alt = this._name;
@@ -36,8 +36,9 @@ export default class Card {
   }
 
   // метод удаления карточки
-  _removeCard(evt) {
-    evt.target.closest('.card').remove();
+  _removeCard() {
+    this._element.remove();
+    this._element = null;
   }
 
   // слушатели кликов
