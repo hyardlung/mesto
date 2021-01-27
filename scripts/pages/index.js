@@ -1,25 +1,22 @@
-import { validationConfig } from '../constants/validation-config.js'
-import { initialCards } from '../constants/initial-cards.js'
 import FormValidator from '../components/FormValidator.js';
-import Card from '../components/Card.js'
-
-const popupCloseButtons = [...document.querySelectorAll('.popup__close-button')];
-
-const popupEditProfile = document.querySelector('.popup_edit-profile');
-const popupFormEditProfile = popupEditProfile.querySelector('.popup__form_edit-profile');
-const nameInput = popupFormEditProfile.querySelector('.popup__input[name="profileName"]');
-const aboutInput = popupFormEditProfile.querySelector('.popup__input[name="profileAbout"]');
-const profileName = document.querySelector('.profile__name');
-const profileAbout = document.querySelector('.profile__about');
-
-const popupAddCard = document.querySelector('.popup_add-card');
-const popupFormAddCard = popupAddCard.querySelector('.popup__form_add-card');
-const cardNameInput = popupFormAddCard.querySelector('.popup__input[name="cardName"]');
-const cardImageInput = popupFormAddCard.querySelector('.popup__input[name="cardImage"]');
-
-const addCardButton = document.querySelector('.profile__add-button');
-
-const cardsContainerElement = document.querySelector('.elements__list');
+import Card from '../components/Card.js';
+import {
+  initialCards,
+  validationConfig,
+  popupCloseButtons,
+  popupEditProfile,
+  popupFormEditProfile,
+  nameInput,
+  aboutInput,
+  profileName,
+  profileAbout,
+  popupAddCard,
+  popupFormAddCard,
+  cardNameInput,
+  cardImageInput,
+  addCardButton,
+  cardsContainerElement
+} from '../utils/constants.js';
 
 
 const editProfileFormValidity = new FormValidator(validationConfig, popupFormEditProfile);
