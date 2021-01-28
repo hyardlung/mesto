@@ -1,3 +1,4 @@
+import Section from '../components/Section.js';
 import FormValidator from '../components/FormValidator.js';
 import Card from '../components/Card.js';
 import {
@@ -18,15 +19,16 @@ import {
   cardsContainerElement
 } from '../utils/constants.js';
 
+const defaultCardList = new Section({items: initialCards}, cardsContainerElement);
 
 const editProfileFormValidity = new FormValidator(validationConfig, popupFormEditProfile);
 const addCardFormValidity = new FormValidator(validationConfig, popupFormAddCard);
 
-initialCards.forEach((item) => {
-  const card = new Card(item, '.elements__template');
-  const cardElement = card.generateCard();
-  cardsContainerElement.append(cardElement);
-})
+// initialCards.forEach((item) => {
+//   const card = new Card(item, '.elements__template');
+//   const cardElement = card.generateCard();
+//   cardsContainerElement.append(cardElement);
+// })
 
 // инициализация попапа добавления карточки
 function initAddNewCardPopup() {
@@ -112,6 +114,8 @@ popupCloseButtons.forEach((closeButton) => {
 popupFormEditProfile.addEventListener('submit', handleEditProfileFormSubmit);
 popupFormAddCard.addEventListener('submit', handleAddCardFormSubmit);
 
+
+defaultCardList.renderItems();
 initEditProfilePopup();
 initAddNewCardPopup();
 editProfileFormValidity.enableValidation();
