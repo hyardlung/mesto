@@ -19,16 +19,22 @@ import {
   cardsContainerElement
 } from '../utils/constants.js';
 
-const defaultCardList = new Section({items: initialCards}, cardsContainerElement);
+// экземпляр класса Section, рендерящий массив дефолтных карточек на страницу
+const defaultCardList = new Section({
+    items: initialCards,
+    // инструкция, по работе с Card
+    renderer: (cardItem) => {
+      const card = new Card(cardItem, '.elements__template');
+      const cardElement = card.generateCard();
+      defaultCardList.addItem(cardElement);
+    },
+  },
+  cardsContainerElement
+);
 
 const editProfileFormValidity = new FormValidator(validationConfig, popupFormEditProfile);
 const addCardFormValidity = new FormValidator(validationConfig, popupFormAddCard);
 
-// initialCards.forEach((item) => {
-//   const card = new Card(item, '.elements__template');
-//   const cardElement = card.generateCard();
-//   cardsContainerElement.append(cardElement);
-// })
 
 // инициализация попапа добавления карточки
 function initAddNewCardPopup() {
