@@ -1,13 +1,10 @@
-import {openPopup} from '../pages/index.js'
 
-const popupPreview = document.querySelector('.popup_preview');
-const previewImage = popupPreview.querySelector('.preview__image');
-const previewCaption = popupPreview.querySelector('.preview__caption');
 
 export default class Card {
-  constructor(data, cardSelector) {
-    this._name = data.name;
-    this._image = data.image;
+  constructor({card, handleOpenPreview}, cardSelector) {
+    this._name = card.name;
+    this._image = card.image;
+    this._handleOpenPreview = handleOpenPreview;
     this._cardSelector = cardSelector;
   }
 
@@ -22,13 +19,13 @@ export default class Card {
     return cardTemplate;
   }
 
-  // метод открывающий предпросмотр изображения         TODO: перенести в index.js, сделать функцией, которая передаётся параметром в конструктор чтобы избавиться от кольцевого импорта
-  _handleOpenPreview() {
-    previewImage.src = this._image;
-    previewImage.alt = this._name;
-    previewCaption.textContent = this._name;
-    openPopup(popupPreview);
-  }
+  // // метод открывающий предпросмотр изображения         TODO: перенести в index.js, сделать функцией, которая передаётся параметром в конструктор чтобы избавиться от кольцевого импорта
+  // _handleOpenPreview() {
+  //   previewImage.src = this._image;
+  //   previewImage.alt = this._name;
+  //   previewCaption.textContent = this._name;
+  //   openPopup(popupPreview);
+  // }
 
   // метод установки/снятия лайка карточки
   _cardLikeToggle(evt) {
@@ -45,8 +42,8 @@ export default class Card {
   _setEventListeners() {
 
     // слушатель клика по картинке карточки
-    this._element.querySelector('.card__image').addEventListener('click', () => {
-      this._handleOpenPreview();
+    this._element.querySelector('.card__image').addEventListener('click', (evt) => {
+      this._handleOpenPreview(evt);
     });
 
     // слушатель клика по кнопке лайка

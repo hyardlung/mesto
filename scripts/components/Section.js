@@ -8,9 +8,7 @@ export default class Section {
 
   // обходит массив, для каждого элемента создаёт экземпляр карточки, вызывает addItem
   renderItems() {
-    this._initialArray.forEach((item) => {
-      this._renderer(item);
-    });
+    this._initialArray.forEach(item => this._renderer(item));
   }
 
   // добавляет элемент в контейнер
