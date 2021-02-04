@@ -10,8 +10,10 @@ import {
   // validationConfig,
   EditProfileElement,
   // popupFormEditProfile,
-  // nameInput,
-  // aboutInput,
+  profileName,
+  profileAbout,
+  nameInput,
+  aboutInput,
   addCardElement,
   // popupFormAddCard,
   cardNameInput,
@@ -23,10 +25,10 @@ import {
   cardsContainerElement
 } from '../utils/constants.js';
 
-
-
 const fullsizePreview = new PopupWithImage(popupPreview);
-fullsizePreview.setEventListeners();
+
+const userProfileInfo = new UserInfo(profileName, profileAbout);
+
 
 // функция для получения карточки (чтобы не дублировать код в экземплярах классов)
 const createCard = (item) => {
@@ -48,7 +50,6 @@ const defaultCardList = new Section({
   },
   cardsContainerElement
 );
-defaultCardList.renderItems();
 
 // экземпляр класса PopupWithForm, отвечает за сбор данных из инпутов и вывод карточки на страницу
 const popupAddCard = new PopupWithForm({
@@ -60,34 +61,38 @@ const popupAddCard = new PopupWithForm({
     popupAddCard.close();
   }
 });
+
+// экземпляр класса PopupWithForm, собирает данные из инпутов попапа редактирования профиля и выводит информацию о пользователе на страницу
+const popupEditProfile = new PopupWithForm({
+  popupSelector: EditProfileElement,
+  handleForm: () => {
+    userProfileInfo.setUserInfo(nameInput, aboutInput);
+    popupEditProfile.close();
+  }
+})
+
+// листнер кнопки добавления карточки
+addCardButton.addEventListener('click', () => {
+  popupAddCard.open();
+});
+
+// листнер кнопки редактирования профиля
+profileEditButton.addEventListener('click', () => {
+  const userData = userProfileInfo.getUserInfo();
+  nameInput.value = userData.name;
+  aboutInput.value = userData.about;
+  popupEditProfile.open();
+});
+
+
+fullsizePreview.setEventListeners();
+defaultCardList.renderItems();
 popupAddCard.setEventListeners();
-
-// // экземпляр класса PopupWithForm, собирает данные из инпутов попапа редактирования профиля и выводит информацию о пользователе на страницу
-// const popupEdit = new PopupWithForm({
-//   popupSelector: EditProfileElement,
-//   handleFormSubmit: ({inputName, inputJob}) => {
-//     return userProfileInfo.setUserInfo({inputName, inputJob});
-//   }
-// })
-// popupEdit.setEventListeners();
-//
-// const userProfileInfo = new UserInfo({profileName, profileAbout});
-
-
-
-
-
-
-
-
-
-
-
+popupEditProfile.setEventListeners();
 
 
 // const editProfileFormValidity = new FormValidator(validationConfig, popupFormEditProfile);
 // const addCardFormValidity = new FormValidator(validationConfig, popupFormAddCard);
-
 //
 // // инициализация попапа редактирования профиля
 // function initEditProfilePopup() {
@@ -109,15 +114,14 @@ popupAddCard.setEventListeners();
 // }
 //
 
-// листнер кнопки добавления карточки
-addCardButton.addEventListener('click', () => {
-  popupAddCard.open();
-});
 
-// profileEditButton.addEventListener('click', () => {
-//   popupEdit.open();
-//   console.log(popupEdit.popupSelector);
-// });
+
+
+
+
+
+
+
 
 // editProfileFormValidity.enableValidation();
 // addCardFormValidity.enableValidation();
