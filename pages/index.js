@@ -7,15 +7,15 @@ import UserInfo from '../components/UserInfo.js';
 
 import {
   initialCards,
-  // validationConfig,
+  validationConfig,
   EditProfileElement,
-  // popupFormEditProfile,
+  popupFormEditProfile,
   profileName,
   profileAbout,
   nameInput,
   aboutInput,
   addCardElement,
-  // popupFormAddCard,
+  popupFormAddCard,
   cardNameInput,
   cardImageInput,
   addCardButton,
@@ -26,9 +26,10 @@ import {
 } from '../utils/constants.js';
 
 const fullsizePreview = new PopupWithImage(popupPreview);
-
 const userProfileInfo = new UserInfo(profileName, profileAbout);
 
+const AddCardFormValidation = new FormValidator(validationConfig, popupFormAddCard);
+const EditProfileFormValidation = new FormValidator(validationConfig, popupFormEditProfile);
 
 // функция для получения карточки (чтобы не дублировать код в экземплярах классов)
 const createCard = (item) => {
@@ -84,45 +85,10 @@ profileEditButton.addEventListener('click', () => {
   popupEditProfile.open();
 });
 
-
 fullsizePreview.setEventListeners();
 defaultCardList.renderItems();
 popupAddCard.setEventListeners();
 popupEditProfile.setEventListeners();
-
-
-// const editProfileFormValidity = new FormValidator(validationConfig, popupFormEditProfile);
-// const addCardFormValidity = new FormValidator(validationConfig, popupFormAddCard);
-//
-// // инициализация попапа редактирования профиля
-// function initEditProfilePopup() {
-//   const profileEditButton = document.querySelector('.profile__edit-button');
-//   profileEditButton.addEventListener('click', () => {
-//   popupFormEditProfile.reset();
-//   nameInput.value = profileName.textContent;
-//   aboutInput.value = profileAbout.textContent;
-//   openPopup(popupEditProfile);
-//   });
-// }
-//
-// // сохранение данных в профиле
-// function handleEditProfileFormSubmit(evt) {
-//   evt.preventDefault();
-//   profileName.textContent = nameInput.value;
-//   profileAbout.textContent = aboutInput.value;
-//   closePopup(popupEditProfile);
-// }
-//
-
-
-
-
-
-
-
-
-
-
-// editProfileFormValidity.enableValidation();
-// addCardFormValidity.enableValidation();
+AddCardFormValidation.enableValidation();
+EditProfileFormValidation.enableValidation();
 
