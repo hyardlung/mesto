@@ -1,19 +1,22 @@
 // класс отвечает за управление отображением информации о пользователе на странице
 export default class UserInfo {
-  constructor(userName, userJob) {
-    this._userName = document.querySelector(userName);
-    this._userJob = document.querySelector(userJob);
+  constructor(userNameSelector, userAboutSelector) {
+    this._userNameSelector = userNameSelector;
+    this._userAboutSelector = userAboutSelector;
   }
 
   // возвращает объект с данными пользователя для вставки в форму при открытии
   getUserInfo() {
-    return {
+    const userInfo = {
+      name: this._userNameSelector.textContent,
+      about: this._userAboutSelector.textContent
     }
+    return userInfo
   }
 
   // принимает новые данные пользователя и добавляет их на страницу
-  setUserInfo(inputName, inputJob) {
-    this._userName.textContent = inputName.value;
-    this._userJob.textContent = inputJob.value;
+  setUserInfo(inputName, inputAbout) {
+    this._userNameSelector.textContent = inputName.value;
+    this._userAboutSelector.textContent = inputAbout.value;
   }
 }
