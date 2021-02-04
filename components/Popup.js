@@ -1,7 +1,7 @@
 // класс отвечает за открытие/закрытие попапа
 export default class Popup {
   constructor(popupSelector) {
-    this._popup = document.querySelector(popupSelector);
+    this._popup = popupSelector;
     this._closeButton = this._popup.querySelector('.popup__close-button');
     this._handleEscClose = this._handleEscClose.bind(this);
     this._handleOverlayClose = this._handleOverlayClose.bind(this);
