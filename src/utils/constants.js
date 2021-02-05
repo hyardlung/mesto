@@ -1,29 +1,19 @@
+//переменные для изображений
+const sunduki = new URL ('../images/sundki.jpeg', import.meta.url);
+const khayyrakan = new URL ('../images/khayyrakan.jpeg', import.meta.url);
+const sshges = new URL ('../images/sayano-shushenskaya-ges.jpg', import.meta.url);
+const lenskieStolby = new URL ('../images/lenskie-stolby.jpeg', import.meta.url);
+const ergaki = new URL ('../images/ergaki.jpg', import.meta.url);
+const kungurskayaPeshera = new URL ('../images/kungurskaya-peshera.jpeg', import.meta.url);
+
 // массив объектов с данными дефолтных карточек
 export const initialCards = [
-  {
-    name: 'Сундуки',
-    image: './images/sundki.jpeg'
-  },
-  {
-    name: 'Хаыйракан',
-    image: './images/hayirakan.jpeg'
-  },
-  {
-    name: 'Саяно-Шушенская ГЭС',
-    image: './images/sayano-shushenskaya-ges.jpg'
-  },
-  {
-    name: 'Ленские столбы',
-    image: './images/lenskie-stolby.jpeg'
-  },
-  {
-    name: 'Ергаки',
-    image: './images/ergaki.jpg'
-  },
-  {
-    name: 'Курганская пещера',
-    image: './images/kungurskaya-peshera.jpeg'
-  }
+  {name: 'Сундуки', image: sunduki},
+  {name: 'Хайыракан', image: khayyrakan},
+  {name: 'Саяно-Шушенская ГЭС', image: sshges},
+  {name: 'Ленские столбы', image: lenskieStolby},
+  {name: 'Ергаки', image: ergaki},
+  {name: 'Курганская пещера', image: kungurskayaPeshera}
 ];
 
 // конфиг валидации
