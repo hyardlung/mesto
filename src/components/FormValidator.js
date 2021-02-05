@@ -60,11 +60,12 @@ export default class FormValidator {
     });
   }
 
+  // метод, включающий валидацию на экземпляре класса
   enableValidation() {
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
-    this._setButtonState();
     this._setEventListener(this._formElement);
+    this._setButtonState();
   }
 }
