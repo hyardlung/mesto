@@ -10,13 +10,15 @@ export default class Popup {
 
   //открытие попапа
   open() {
-    this.setEventListeners();
+    // обработчик нажатия на Esc
+    document.addEventListener('keydown', this._handleEscClose);
     this._popup.classList.add('popup_opened');
   }
 
   // закрытие попапа
   close() {
-    this._removeEventListeners();
+    // удаляем обработчик нажатия на Esc
+    document.removeEventListener('keydown', this._handleEscClose);
     this._popup.classList.remove('popup_opened');
   }
 
@@ -41,20 +43,10 @@ export default class Popup {
 
   // метод добавления листнеров
   setEventListeners() {
-    // обработчик нажатия на Esc
-    document.addEventListener('keydown', this._handleEscClose);
-
     // обработчик клика мимо окна
     this._popup.addEventListener('click', this._handleOverlayClose);
 
     // обработчик клика по крестику
     this._closeButton.addEventListener('click', this._handleCrossClose);
-  }
-
-  // метод удаления листнеров
-  _removeEventListeners() {
-    document.removeEventListener('keydown', this._handleEscClose);
-    this._popup.removeEventListener('click', this._handleOverlayClose);
-    this._closeButton.removeEventListener('click', this._handleCrossClose);
   }
 }
