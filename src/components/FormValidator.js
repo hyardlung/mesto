@@ -54,8 +54,7 @@ export default class FormValidator {
     this._formElement.addEventListener('reset', () => {
       inputList.forEach((input) => {
         this._hideInputError(input);
-        this._submitButton.classList.add(this._setOfValidationParams.buttonInvalidClass);
-        this._submitButton.disabled = true;
+        this._setButtonState();
       });
     });
   }
