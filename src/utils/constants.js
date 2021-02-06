@@ -29,8 +29,8 @@ export const EditProfileElement = document.querySelector('.popup_edit-profile');
 export const popupFormEditProfile = EditProfileElement.querySelector('.popup__form_edit-profile');
 export const nameInput = popupFormEditProfile.querySelector('.popup__input[name="profileName"]');
 export const aboutInput = popupFormEditProfile.querySelector('.popup__input[name="profileAbout"]');
-export const profileName = document.querySelector('.profile__name');
-export const profileAbout = document.querySelector('.profile__about');
+export const profileName = '.profile__name';
+export const profileAbout = '.profile__about';
 
 export const addCardElement = document.querySelector('.popup_add-card');
 export const popupFormAddCard = addCardElement.querySelector('.popup__form_add-card');
