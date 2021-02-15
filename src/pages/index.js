@@ -6,9 +6,9 @@ import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api';
 
 import {
-  initialCards,
   validationConfig,
   EditProfileElement,
   popupFormEditProfile,
@@ -33,6 +33,21 @@ const userProfileInfo = new UserInfo(profileName, profileAbout);
 const AddCardFormValidation = new FormValidator(validationConfig, popupFormAddCard);
 const EditProfileFormValidation = new FormValidator(validationConfig, popupFormEditProfile);
 
+const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-20/',
+  headers: {
+    authorization: 'b71f6995-cb82-42c3-9d3d-27eb5d0d8016',
+    'Content-Type': 'application/json'
+  }
+})
+
+// рендер массива карточек с сервера на страницу
+api.getRemoteCards()
+  .then(data => {
+    return defaultCardList.renderItems(data);
+  })
+
+
 // функция для получения карточки (чтобы не дублировать код в экземплярах классов)
 const createCard = (item) => {
   const card = new Card({
@@ -44,7 +59,6 @@ const createCard = (item) => {
 
 // экземпляр класса Section, рендерящий массив дефолтных карточек на страницу
 const defaultCardList = new Section({
-    items: initialCards,
     renderer: (item) => {
       const card = createCard(item);
       const cardElement = card.generateCard();
@@ -88,7 +102,6 @@ profileEditButton.addEventListener('click', () => {
 });
 
 fullsizePreview.setEventListeners();
-defaultCardList.renderItems();
 popupAddCard.setEventListeners();
 popupEditProfile.setEventListeners();
 AddCardFormValidation.enableValidation();

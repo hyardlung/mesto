@@ -1,7 +1,7 @@
 export default class Card {
   constructor({card, handleOpenPreview}, cardSelector) {
     this._name = card.name;
-    this._image = card.image;
+    this._link = card.link;
     this._handleOpenPreview = handleOpenPreview;
     this._cardSelector = cardSelector;
   }
@@ -36,7 +36,7 @@ export default class Card {
     this._cardImage = this._element.querySelector('.card__image');
     this._cardCaption = this._element.querySelector('.card__heading');
 
-    this._cardImage.src = this._image;
+    this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardCaption.textContent = this._name;
     this._setEventListeners();
