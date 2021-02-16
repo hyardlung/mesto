@@ -14,6 +14,12 @@ export default class UserInfo {
     return userInfo
   }
 
+  // сохраняет данные с сервера в инпуты
+  saveUserInfo(data, nameInput, aboutInput) {
+    nameInput.value = data.name;
+    aboutInput.value = data.about;
+  }
+
   // принимает новые данные пользователя и добавляет их на страницу
   setUserInfo(data) {
     this._userNameElement.textContent = data.name;

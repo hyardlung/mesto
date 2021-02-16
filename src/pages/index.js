@@ -83,8 +83,14 @@ const popupAddCard = new PopupWithForm({
 const popupEditProfile = new PopupWithForm({
   popupSelector: EditProfileElement,
   handleForm: () => {
-    userProfileInfo.setUserInfo(nameInput, aboutInput);
-    popupEditProfile.close();
+    const apiEditProfile = api.editUserData({
+      name: nameInput.value,
+      about: aboutInput.value
+    });
+    apiEditProfile.then(data => {
+      userProfileInfo.setUserInfo(data);
+      popupEditProfile.close();
+    })
   }
 })
 
@@ -95,10 +101,14 @@ addCardButton.addEventListener('click', () => {
 
 // листнер кнопки редактирования профиля
 profileEditButton.addEventListener('click', () => {
-  const userData = userProfileInfo.getUserInfo();
-  nameInput.value = userData.name;
-  aboutInput.value = userData.about;
-  popupEditProfile.open();
+  const apiProfile = api.getUserData();
+  apiProfile.then(data => {
+    const userData = userProfileInfo.getUserInfo(data);
+    userProfileInfo.saveUserInfo(userData, nameInput, aboutInput);
+    nameInput.value = userData.name;
+    aboutInput.value = userData.about;
+    popupEditProfile.open();
+  })
 });
 
 fullsizePreview.setEventListeners();
@@ -112,6 +122,5 @@ api.getUserData()
   .then(data => {
     userProfileInfo.getUserInfo(data);
     userProfileInfo.setUserInfo(data);
-  })
-  .then(getResponse)
+  });
 
