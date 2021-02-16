@@ -107,3 +107,11 @@ popupEditProfile.setEventListeners();
 AddCardFormValidation.enableValidation();
 EditProfileFormValidation.enableValidation();
 
+// запрос данных о пользователе с сервера и передача их на страницу
+api.getUserData()
+  .then(data => {
+    userProfileInfo.getUserInfo(data);
+    userProfileInfo.setUserInfo(data);
+  })
+  .then(getResponse)
+

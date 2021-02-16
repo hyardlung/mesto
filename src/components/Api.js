@@ -13,7 +13,12 @@ export default class Api {
 
   getRemoteCards() {
     return fetch(`${this._url}cards`, {
-      method: 'GET',
+      headers: this._headers
+    }).then(this.getResponse)
+  }
+
+  getUserData() {
+    return fetch(`${this._url}users/me`, {
       headers: this._headers
     }).then(this.getResponse)
   }
