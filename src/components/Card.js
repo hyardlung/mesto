@@ -1,7 +1,7 @@
 export default class Card {
-  constructor({card, handleOpenPreview}, cardSelector) {
-    this._name = card.name;
-    this._link = card.link;
+  constructor(data, {handleOpenPreview}, cardSelector) {
+    this._name = data.name;
+    this._link = data.link;
     this._handleOpenPreview = handleOpenPreview;
     this._cardSelector = cardSelector;
   }

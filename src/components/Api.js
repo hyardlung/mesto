@@ -12,13 +12,6 @@ export default class Api {
     return res.ok ? res.json() : Promise.reject(`Что-то пошло не так: ${res.status}`)
   }
 
-  // запрос карточек с сервера
-  getRemoteCards() {
-    return fetch(`${this._url}cards`, {
-      headers: this._headers
-    }).then(this.getResponse)
-  }
-
   // запрос на получение данных своего профиля
   getUserData() {
     return fetch(`${this._url}users/me`, {
@@ -32,6 +25,21 @@ export default class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({name, about})
+    }).then(this.getResponse)
+  }
+
+  // запрос карточек с сервера
+  getRemoteCards() {
+    return fetch(`${this._url}cards`, {
+      headers: this._headers
+    }).then(this.getResponse)
+  }
+
+  sendCard(name, link) {
+    return fetch(`${this._url}cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify(name, link)
     }).then(this.getResponse)
   }
 }
