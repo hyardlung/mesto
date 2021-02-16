@@ -14,13 +14,13 @@ export default class Section {
         name: item.name,
         link: item.link,
         owner: item.owner._id,
-        // ownerId: item.owner._id
+        ownerId: item.owner._id
       })
     });
   }
 
   // добавляет элемент в контейнер
   addItem(element) {
-    this._container.prepend(element);
+    this._container.append(element);
   }
 }

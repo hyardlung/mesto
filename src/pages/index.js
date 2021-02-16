@@ -48,10 +48,9 @@ api.getRemoteCards()
   })
 
 
-// функция для получения карточки (чтобы не дублировать код в экземплярах классов)
+// функция для создания карточки (чтобы не дублировать код в экземплярах классов)
 const createCard = (item) => {
-  const card = new Card({
-    card: item,
+  const card = new Card(item, {
     handleOpenPreview: () => fullsizePreview.open(card)
   }, cardTemplate);
   return card
@@ -68,18 +67,26 @@ const defaultCardList = new Section({
   cardsContainerElement
 );
 
-// экземпляр класса PopupWithForm, отвечает за сбор данных из инпутов и вывод карточки на страницу
+/* инстанс класса PopupWithForm: форма отправляет серверу запрос
+   на добавление карточки и генерирует её же на страницу */
 const popupAddCard = new PopupWithForm({
   popupSelector: addCardElement,
   handleForm: () => {
-    const card = createCard({image: cardImageInput.value, name: cardNameInput.value});
-    const cardElement = card.generateCard();
-    defaultCardList.addItem(cardElement);
-    popupAddCard.close();
+    const apiNewCard = api.sendCard({
+      name: cardNameInput.value,
+      link: cardImageInput.value
+    });
+    apiNewCard.then(data => {
+      const card = createCard(data);
+      const cardElement = card.generateCard();
+      defaultCardList.addItem(cardElement);
+      popupAddCard.close();
+    })
   }
 });
 
-// экземпляр класса PopupWithForm, собирает данные из инпутов попапа редактирования профиля и выводит информацию о пользователе на страницу
+/* инстанс класса PopupWithForm: форма тянет данные в инпуты с сервера,
+   отправляет обратно новые данные */
 const popupEditProfile = new PopupWithForm({
   popupSelector: EditProfileElement,
   handleForm: () => {
