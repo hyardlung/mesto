@@ -1,11 +1,11 @@
 export default class Card {
   constructor(data, user, {handleOpenPreview}, cardSelector) {
     // this._likes = data.likes;
-    // this._id = data._id;
+    this._data = data;
+    this._id = data._id;
     this._name = data.name;
     this._link = data.link;
     this._user = user;
-    // this._owner = data.owner;
     this._ownerId = data.ownerId;
     this._handleOpenPreview = handleOpenPreview;
     this._cardSelector = cardSelector;
@@ -28,7 +28,7 @@ export default class Card {
   }
 
   // метод удаления карточки
-  _removeCard() {
+  removeCard() {
     this._element.remove();
     this._element = null;
   }
@@ -36,14 +36,8 @@ export default class Card {
   /* метод для проверки хозяина карточки и показа/скрытия иконки удаления карточки
    в зависимости от результата проверки */
   _showTrashCan() {
-    this._removeButton = this._element.querySelector('.card__remove-button');
     if (this._ownerId === this._user._id) {
-      console.log(this._ownerId)
-      console.log(this._user._id)
-
       this._removeButton.classList.add('card__remove-button_active');
-      // слушатель клика по корзине (кнопке удаления карточки)
-      this._removeButton.addEventListener('click', (evt) => {this._removeCard(evt)})
     } else {
       this._removeButton.remove();
       this._removeButton = null;
@@ -70,6 +64,7 @@ export default class Card {
 
   // слушатели кликов
   _setEventListeners() {
+    this._removeButton = this._element.querySelector('.card__remove-button');
     this._cardImage = this._element.querySelector('.card__image');
     this._cardLike = this._element.querySelector('.card__like-button');
 
@@ -79,6 +74,9 @@ export default class Card {
     // слушатель клика по кнопке лайка
     this._cardLike.addEventListener('click', (evt) => {this._cardLikeToggle(evt)});
 
-
+    // слушатель клика по корзине (кнопке удаления карточки)
+    this._removeButton.addEventListener('click', () => {
+      this.removeCard();
+    });
   }
 }

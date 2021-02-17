@@ -22,6 +22,8 @@ import {
   cardImageInput,
   addCardButton,
   profileEditButton,
+  confirmDeleteElement,
+  popupFormConfirmDelete,
   popupPreview,
   cardTemplate,
   cardsContainerElement
@@ -52,7 +54,7 @@ const createCard = (item, user) => {
   return card
 }
 
-// экземпляр класса Section, рендерящий массив дефолтных карточек на страницу
+// инстанс класса Section, рендерящий массив дефолтных карточек на страницу
 const defaultCardList = new Section({
     renderer: (item) => {
       const card = createCard(item, user);

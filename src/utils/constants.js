@@ -22,8 +22,9 @@ export const cardImageInput = popupFormAddCard.querySelector('.popup__input[name
 export const addCardButton = document.querySelector('.profile__add-button');
 export const profileEditButton = document.querySelector('.profile__edit-button');
 
+// export const confirmDeleteElement = document.querySelector('.popup_confirm-delete');
+// export const popupFormConfirmDelete = confirmDeleteElement.querySelector('.popup__form_confirm-delete');
+
 export const popupPreview = document.querySelector('.popup_preview');
-
 export const cardTemplate = document.querySelector('.elements__template');
-
 export const cardsContainerElement = document.querySelector('.elements__list');

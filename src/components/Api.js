@@ -42,4 +42,12 @@ export default class Api {
       body: JSON.stringify(name, link)
     }).then(this.getResponse)
   }
+
+  deleteCard(data) {
+    return fetch(`${this._url}cards/${data._id}`, {
+      method: 'DELETE',
+      headers: this._headers,
+      body: JSON.stringify(data)
+    }).then(this.getResponse)
+  }
 }
