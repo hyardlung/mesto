@@ -1,15 +1,14 @@
 export default class Card {
-  constructor(data, user, {handleOpenPreview}, cardSelector) {
+  constructor(data, user, {handleOpenPreview}, cardSelector, deleteHandler) {
     // this._likes = data.likes;
-    this._data = data;
     this._id = data._id;
     this._name = data.name;
     this._link = data.link;
-    this._user = user;
     this._ownerId = data.ownerId;
+    this._user = user;
     this._handleOpenPreview = handleOpenPreview;
     this._cardSelector = cardSelector;
-
+    this._deleteHandler = deleteHandler;
   }
 
   // метод забирающий разметку из HTML и клонирующий элемент
@@ -27,7 +26,7 @@ export default class Card {
     evt.target.classList.toggle('card__like-button_active');
   }
 
-  // метод удаления карточки
+  // метод удаления карточки из вёрстки
   removeCard() {
     this._element.remove();
     this._element = null;
@@ -38,28 +37,7 @@ export default class Card {
   _showTrashCan() {
     if (this._ownerId === this._user._id) {
       this._removeButton.classList.add('card__remove-button_active');
-    } else {
-      this._removeButton.remove();
-      this._removeButton = null;
     }
-  }
-
-  // метод генерирующий карточку и готовящий её к публикации
-  generateCard() {
-    // Запишем разметку в приватное поле _element.
-    // Так у других элементов появится доступ к ней.
-    this._element = this._getTemplate();
-    // Добавим данные
-    this._cardImage = this._element.querySelector('.card__image');
-    this._cardCaption = this._element.querySelector('.card__heading');
-
-    this._cardImage.src = this._link;
-    this._cardImage.alt = this._name;
-    this._cardCaption.textContent = this._name;
-    this._setEventListeners();
-    this._showTrashCan();
-    // Вернём элемент наружу
-    return this._element;
   }
 
   // слушатели кликов
@@ -75,8 +53,31 @@ export default class Card {
     this._cardLike.addEventListener('click', (evt) => {this._cardLikeToggle(evt)});
 
     // слушатель клика по корзине (кнопке удаления карточки)
-    this._removeButton.addEventListener('click', () => {
-      this.removeCard();
-    });
+    this._removeButton.addEventListener('click', this._deleteHandler);
   }
+
+  // собсна, возвращает id карточки
+  returnCardId() {
+    return this._id;
+  }
+
+  // метод генерирующий карточку и готовящий её к публикации
+  generateCard() {
+    // Запишем разметку в приватное поле _element.
+    // Так у других элементов появится доступ к ней.
+    this._element = this._getTemplate();
+    // Добавим данные
+    this._cardImage = this._element.querySelector('.card__image');
+    this._cardCaption = this._element.querySelector('.card__heading');
+
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
+    this._cardCaption.textContent = this._name;
+
+    this._setEventListeners();
+    this._showTrashCan();
+
+    return this._element;
+  }
+
 }

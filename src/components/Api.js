@@ -35,6 +35,7 @@ export default class Api {
     }).then(this.getResponse)
   }
 
+  // запрос на добавление карточки на сервер
   sendCard(name, link) {
     return fetch(`${this._url}cards`, {
       method: 'POST',
@@ -43,11 +44,16 @@ export default class Api {
     }).then(this.getResponse)
   }
 
-  deleteCard(data) {
-    return fetch(`${this._url}cards/${data._id}`, {
+  // запрос на удаление карточки с сервера
+  deleteCard(cardId) {
+    return fetch(`${this._url}cards/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers,
-      body: JSON.stringify(data)
+      headers: this._headers
     }).then(this.getResponse)
   }
 }
+
+
+
+
+
