@@ -7,6 +7,7 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api';
+import PopupConfirmDelete from '../components/PopupConfirmDelete.js';
 
 import {
   validationConfig,
@@ -23,7 +24,6 @@ import {
   addCardButton,
   profileEditButton,
   confirmDeleteElement,
-  popupFormConfirmDelete,
   popupPreview,
   cardTemplate,
   cardsContainerElement
@@ -31,9 +31,9 @@ import {
 
 let user = null;
 
-
 const fullsizePreview = new PopupWithImage(popupPreview);
 const userProfileInfo = new UserInfo(profileName, profileAbout);
+const confirmDelete = new PopupConfirmDelete(confirmDeleteElement);
 
 const AddCardFormValidation = new FormValidator(validationConfig, popupFormAddCard);
 const EditProfileFormValidation = new FormValidator(validationConfig, popupFormEditProfile);
@@ -50,8 +50,23 @@ const api = new Api({
 const createCard = (item, user) => {
   const card = new Card(item, user, {
     handleOpenPreview: () => fullsizePreview.open(card)
-  }, cardTemplate);
+  }, cardTemplate,
+    () => {
+    confirmDelete.setEventListeners(removeCard(card));
+    confirmDelete.open();
+    });
   return card
+}
+
+// функция для удаление карточки с сервера
+const removeCard = (card) => {
+  return () => {
+    api.deleteCard(card.returnCardId())
+      .then(() => {
+        confirmDelete.close();
+        card.removeCard();
+      })
+  }
 }
 
 // инстанс класса Section, рендерящий массив дефолтных карточек на страницу
@@ -116,12 +131,6 @@ profileEditButton.addEventListener('click', () => {
   })
 });
 
-fullsizePreview.setEventListeners();
-popupAddCard.setEventListeners();
-popupEditProfile.setEventListeners();
-AddCardFormValidation.enableValidation();
-EditProfileFormValidation.enableValidation();
-
 Promise.all([
   api.getUserData(),
   api.getRemoteCards()
@@ -133,3 +142,10 @@ Promise.all([
   user = userData;
   defaultCardList.renderItems(remoteCards.reverse());
 })
+
+fullsizePreview.setEventListeners();
+popupAddCard.setEventListeners();
+popupEditProfile.setEventListeners();
+AddCardFormValidation.enableValidation();
+EditProfileFormValidation.enableValidation();
+

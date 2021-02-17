@@ -43,10 +43,7 @@ export default class Popup {
 
   // метод добавления листнеров
   setEventListeners() {
-    // обработчик клика мимо окна
-    this._popup.addEventListener('click', this._handleOverlayClose);
-
-    // обработчик клика по крестику
-    this._closeButton.addEventListener('click', this._handleCrossClose);
+    this._popup.addEventListener('click', this._handleOverlayClose);  // обработчик клика мимо окна
+    this._closeButton.addEventListener('click', this._handleCrossClose);  // обработчик клика по крестику
   }
 }
