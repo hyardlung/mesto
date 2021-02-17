@@ -27,6 +27,9 @@ import {
   cardsContainerElement
 } from '../utils/constants.js';
 
+let user = null;
+
+
 const fullsizePreview = new PopupWithImage(popupPreview);
 const userProfileInfo = new UserInfo(profileName, profileAbout);
 
@@ -41,16 +44,9 @@ const api = new Api({
   }
 })
 
-// рендер массива карточек с сервера на страницу
-api.getRemoteCards()
-  .then(data => {
-    return defaultCardList.renderItems(data);
-  })
-
-
 // функция для создания карточки (чтобы не дублировать код в экземплярах классов)
-const createCard = (item) => {
-  const card = new Card(item, {
+const createCard = (item, user) => {
+  const card = new Card(item, user, {
     handleOpenPreview: () => fullsizePreview.open(card)
   }, cardTemplate);
   return card
@@ -59,10 +55,10 @@ const createCard = (item) => {
 // экземпляр класса Section, рендерящий массив дефолтных карточек на страницу
 const defaultCardList = new Section({
     renderer: (item) => {
-      const card = createCard(item);
+      const card = createCard(item, user);
       const cardElement = card.generateCard();
       defaultCardList.addItem(cardElement);
-    },
+    }
   },
   cardsContainerElement
 );
@@ -77,7 +73,7 @@ const popupAddCard = new PopupWithForm({
       link: cardImageInput.value
     });
     apiNewCard.then(data => {
-      const card = createCard(data);
+      const card = createCard(data, data.owner._id);
       const cardElement = card.generateCard();
       defaultCardList.addItem(cardElement);
       popupAddCard.close();
@@ -124,10 +120,14 @@ popupEditProfile.setEventListeners();
 AddCardFormValidation.enableValidation();
 EditProfileFormValidation.enableValidation();
 
-// запрос данных о пользователе с сервера и передача их на страницу
-api.getUserData()
-  .then(data => {
-    userProfileInfo.getUserInfo(data);
-    userProfileInfo.setUserInfo(data);
-  });
+Promise.all([
+  api.getUserData(),
+  api.getRemoteCards()
+]).then(values => {
+  const [userData, remoteCards] = values;
+  userProfileInfo.getUserInfo(userData);
+  userProfileInfo.setUserInfo(userData);
 
+  user = userData;
+  defaultCardList.renderItems(remoteCards.reverse());
+})
