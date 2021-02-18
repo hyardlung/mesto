@@ -3,7 +3,7 @@ import Popup from './Popup';
 export default class PopupConfirmDelete extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
-    this._confirmDeleteButton = document.querySelector('.popup_button-confirmation');
+    this._confirmDeleteButton = document.querySelector('.popup__save-button_confirmation');
   }
 
   setEventListeners(deleteCard) {
