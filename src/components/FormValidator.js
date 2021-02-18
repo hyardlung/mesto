@@ -39,6 +39,8 @@ export default class FormValidator {
     }
   }
 
+
+
   // метод слушателей
   _setEventListener() {
     const inputList = this._formElement.querySelectorAll(this._setOfValidationParams.inputSelector);

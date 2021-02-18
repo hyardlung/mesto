@@ -8,7 +8,7 @@ export default class PopupWithImage extends Popup {
   };
 
   open(card) {
-    this._previewImage.src = card._image;
+    this._previewImage.src = card._link;
     this._previewImage.alt = card._name;
     this._previewCaption.textContent = card._name;
     super.open();
