@@ -1,0 +1,19 @@
+.avatar__button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  background: none;
+  border: none;
+  /*transition: all .3s;*/
+  cursor: pointer;
+}
+
+.avatar__button:hover {
+  background:
+    url('../../../images/avatar-edit.svg')
+    center
+    no-repeat
+    rgba(0, 0, 0, .8);
+}
