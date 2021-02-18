@@ -2,9 +2,6 @@ export default class Api {
   constructor(params) {
     this._url = params.url;
     this._headers = params.headers;
-    // this._body = body;
-    // this._users = users;
-    // this._me = me;
   }
 
   // проверка промиса, возврат json'а в случае резолва, возврат статуса ошибки в случае реджекта
@@ -51,7 +48,31 @@ export default class Api {
       headers: this._headers
     }).then(this.getResponse)
   }
+
+  // запрос на добавление лайка карточке
+  setLike(cardId) {
+    return fetch(`${this._url}cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: this._headers
+    }).then(this.getResponse)
+  }
+
+  removeLike(cardId) {
+    return fetch(`${this._url}cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers
+    }).then(this.getResponse)
+  }
+
+  updateAvatar(imgUrl) {
+    return fetch(`${this._url}users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({avatar: imgUrl.avatarLink})
+    }).then(this.getResponse)
+  }
 }
+
 
 
 

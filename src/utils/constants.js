@@ -13,11 +13,16 @@ export const nameInput = popupFormEditProfile.querySelector('.popup__input[name=
 export const aboutInput = popupFormEditProfile.querySelector('.popup__input[name="profileAbout"]');
 export const profileName = '.profile__name';
 export const profileAbout = '.profile__about';
+export const avatarImage = '.avatar__image';
 
 export const addCardElement = document.querySelector('.popup_add-card');
 export const popupFormAddCard = addCardElement.querySelector('.popup__form_add-card');
 export const cardNameInput = popupFormAddCard.querySelector('.popup__input[name="cardName"]');
 export const cardImageInput = popupFormAddCard.querySelector('.popup__input[name="cardImage"]');
+
+export const updateAvatarElement = document.querySelector('.popup_update-avatar');
+export const updateAvatarSubmitButton = document.querySelector('.avatar__button');
+export const popupFormUpdateAvatar = updateAvatarElement.querySelector('.popup__form_update-avatar');
 
 export const addCardButton = document.querySelector('.profile__add-button');
 export const profileEditButton = document.querySelector('.profile__edit-button');

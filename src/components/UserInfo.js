@@ -1,8 +1,9 @@
 // класс отвечает за управление отображением информации о пользователе на странице
 export default class UserInfo {
-  constructor(userNameSelector, userAboutSelector) {
+  constructor(userNameSelector, userAboutSelector, userAvatarSelector) {
     this._userNameElement = document.querySelector(userNameSelector);
     this._userAboutElement = document.querySelector(userAboutSelector);
+    this._userAvatarElement = document.querySelector(userAvatarSelector);
   }
 
   // возвращает объект с данными пользователя
@@ -24,13 +25,6 @@ export default class UserInfo {
   setUserInfo(data) {
     this._userNameElement.textContent = data.name;
     this._userAboutElement.textContent = data.about;
-  }
-
-
-  setUserId(id) {
-    this._userId = id;
-  }
-  returnUserId() {
-    return this._userId;
+    this._userAvatarElement.setAttribute('src', data.avatar);
   }
 }
