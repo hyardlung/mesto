@@ -39,8 +39,8 @@ const fullsizePreview = new PopupWithImage(popupPreview);
 const userProfileInfo = new UserInfo(profileName, profileAbout, avatarImage);
 const confirmDelete = new PopupConfirmDelete(confirmDeleteElement);
 
-const AddCardFormValidation = new FormValidator(validationConfig, popupFormAddCard);
-const EditProfileFormValidation = new FormValidator(validationConfig, popupFormEditProfile);
+const addCardFormValidation = new FormValidator(validationConfig, popupFormAddCard);
+const editProfileFormValidation = new FormValidator(validationConfig, popupFormEditProfile);
 const updateAvatarFormValidation = new FormValidator(validationConfig, popupFormUpdateAvatar);
 
 const api = new Api({
@@ -62,10 +62,12 @@ const createCard = (item, user) => {
     setLike: () => {
       api.setLike(card.returnCardId())
         .then(res => card.changeLikeCounter(res.likes.length))
+        .catch(err => console.log(err))
     },
     removeLike: () => {
       api.removeLike(card.returnCardId())
         .then(res => card.changeLikeCounter(res.likes.length))
+        .catch(err => console.log(err))
     }
   },
     cardTemplate);
@@ -80,6 +82,7 @@ const removeCard = (card) => {
         confirmDelete.close();
         card.removeCard();
       })
+      .catch(err => console.log(err))
   }
 }
 
@@ -95,12 +98,6 @@ const renderLoading = (popupSelector, isLoading) => {
       saveButton.textContent = 'Сохранить'
     }
   }
-}
-
-// функция для открытия попапа обновления аватара
-const openAvatar = () => {
-  popupUpdateAvatar.open();
-  popupUpdateAvatar.setEventListeners();
 }
 
 // инстанс класса Section, рендерящий массив дефолтных карточек на страницу
@@ -132,6 +129,7 @@ const popupAddCard = new PopupWithForm({
         renderLoading('.popup_add-card', false);
         popupAddCard.close();
       })
+      .catch(err => console.log(err))
   }
 });
 
@@ -151,6 +149,7 @@ const popupEditProfile = new PopupWithForm({
         renderLoading('.popup_edit-profile', false);
         popupEditProfile.close();
       })
+      .catch(err => console.log(err))
     }
 })
 
@@ -166,6 +165,7 @@ const popupUpdateAvatar = new PopupWithForm({
         renderLoading('.popup_update-avatar', false);
         popupUpdateAvatar.close();
       })
+      .catch(err => console.log(err))
     }
 })
 
@@ -174,20 +174,20 @@ addCardButton.addEventListener('click', () => {
   popupAddCard.open();
 });
 
+// листнер кнопки редактирования аватара
+updateAvatarSubmitButton.addEventListener('click', () => {
+  popupUpdateAvatar.open();
+})
+
 // листнер кнопки редактирования профиля
 profileEditButton.addEventListener('click', () => {
-  api.getUserData()
-  .then(data => {
-    const userData = userProfileInfo.getUserInfo(data);
+    const userData = userProfileInfo.getUserInfo();
     userProfileInfo.saveUserInfo(userData, nameInput, aboutInput);
     nameInput.value = userData.name;
     aboutInput.value = userData.about;
     popupEditProfile.open();
-  })
 });
 
-// листнер кнопки редактирования аватара
-updateAvatarSubmitButton.addEventListener('click', openAvatar)
 
 Promise.all([
   api.getUserData(),
@@ -196,15 +196,16 @@ Promise.all([
   const [userData, remoteCards] = values;
   userProfileInfo.getUserInfo(userData);
   userProfileInfo.setUserInfo(userData);
-
   user = userData;
   defaultCardList.renderItems(remoteCards.reverse());
 })
+  .catch(err => console.log(err));
 
 fullsizePreview.setEventListeners();
 popupAddCard.setEventListeners();
+popupUpdateAvatar.setEventListeners();
 popupEditProfile.setEventListeners();
-AddCardFormValidation.enableValidation();
-EditProfileFormValidation.enableValidation();
+addCardFormValidation.enableValidation();
+editProfileFormValidation.enableValidation();
 updateAvatarFormValidation.enableValidation();
 
