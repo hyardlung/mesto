@@ -7,10 +7,10 @@ export default class UserInfo {
   }
 
   // возвращает объект с данными пользователя
-  getUserInfo(data) {
+  getUserInfo() {
     const userInfo = {
-      name: data.name,
-      about: data.about
+      name: this._userNameElement.textContent,
+      about: this._userAboutElement.textContent
     }
     return userInfo
   }
